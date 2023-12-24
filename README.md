@@ -7,9 +7,7 @@ We invite you to join us in making a positive impact on the lives of pets and th
 
 - [About](#about)
 - [Features](#features)
-- [Getting Started](#getting-started)
-- [Contributing](#contributing)
-- [License](#license)
+
 
 ## About
 
