@@ -1,0 +1,79 @@
+/* AboutPage.css */
+.about-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #C3B8B1;
+    max-width: 100%;
+    align-items: center;
+    padding-top: 3rem;
+    background-color: transparent;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: 100vh; /* Set height to 100vh */
+    overflow-y: auto; /* Allow vertical scrolling */
+  }
+  .content{
+    display: flex;
+    justify-content: center;
+    position: relative;
+  }
+
+  .content::before,
+  .content::after {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 15%;
+    background-image: url('../../assets/images/aboutPaw.png');
+    background-size: contain;
+  }
+
+  .content::after {
+    right: 0;
+  }
+  .content::before{
+    left: 0;
+  }
+  .image-container {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    text-align: center; 
+    z-index: 1;
+  }
+  
+  .background-image-about {
+    max-width: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+  
+  
+  .glass-container-about {
+    display: flex;
+    flex-direction: column;
+    max-width: 75%;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    padding: 3rem 2rem;;
+    text-align: center;
+    z-index: 1;
+    margin-top: -1rem;
+    backdrop-filter: blur(2px);
+    border: 1px solid rgba(255, 255, 255,0.4);
+    box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.175);
+  }
+  
+   
+  .glass-container-about > p{
+    line-height: 1.6;
+    color: #000000;
+    margin-bottom: 1.5rem;
+    
+  }
+  .glass-container-about > h2{
+    color: #000000;
+    margin-bottom: 0.5rem;
+  }
+  
+  
