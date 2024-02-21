@@ -1,0 +1,100 @@
+.register-page {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(rgba(195, 184, 177, 0.6), rgba(195, 184, 177, 0.6)), url('../../assets/images/backroundImg.jpeg');
+  background-size: contain;
+  background-position: right top;
+  z-index: 0;
+  background-repeat: no-repeat;
+  height: 100vh; /* Set height to 100vh */
+  overflow-y: auto; /* Allow vertical scrolling */
+  }
+  
+  .glass-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 330px;
+    background: rgba(255, 255, 255, 0.3);
+    padding: 15px;
+    padding-bottom: inherit;
+    align-items: center;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    z-index: 1; /* Ensure the glass container is on top */
+  }
+  
+  h2 {
+    color: #333;
+  }
+  
+  .register-form {
+    margin-top: 20px;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  button>register {
+    background-color: #C3B8B1;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  button:hover> register {
+    background-color: #C3B8B1;
+  }
+  
+  .or-text-register {
+    color: #fff;
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    height: 1rem;
+    width: 100%;
+  }
+  
+  .or-text-register > span {
+    line-height: 0.625rem;
+  }
+  
+  .or-text-register::after,
+  .or-text-register::before {
+    content: '';
+    flex: 1;
+    height: 1px;
+    border-bottom: 1px solid #fff;;
+  }
+  
+ 
+  .google-sign-up {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+  }
+  
+  .google-sign-up span {
+    color: #333;
+  }
+  
+  .google-sign-up img {
+    width: 40px;
+    height: 40px;
+  }
+  
