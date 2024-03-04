@@ -3,11 +3,35 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const mongoose = require('mongoose');
+// const MongoDBStore = require("connect-mongodb-session")(session);
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+var connectDB = require('./db');
 var app = express();
+
+connectDB();
+
+// //Create a session for the user
+// const store = new MongoDBStore({
+//   uri: process.env.MONGO_URI, 
+//   collection: 'sessions',
+//   mongooseConnection: mongoose.connection
+// });
+
+// // Multer Configuration
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, 'public/')
+//   },
+//   filename: function (req, file, cb) {
+//     const ext = file.originalname.split('.').filter(Boolean).slice(1).join('.');
+//     cb(null, Date.now() + '.' + ext);
+//   }
+// });
+// var upload = multer({ storage: storage });
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -21,6 +45,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+// app.use('/upload', upload.single('file'), fileUploadRouter); // Use the file upload router
+// resolver(app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

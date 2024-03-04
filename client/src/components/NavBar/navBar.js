@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import logoImg from '../../assets/images/backroundImg.jpeg';
-import { AccountCircle, Mail, ExitToApp, AddCircle, Home, Search } from '@material-ui/icons'; // Import Material-UI Icons
+// import { AccountCircle, Mail, ExitToApp, AddCircle, Home, Search } from '@material-ui/icons'; // Import Material-UI Icons
 import './navBar.css';
 
 function NavigationBar() {
@@ -47,17 +47,17 @@ function NavigationBar() {
                         onChange={handleSearchChange}
                         placeholder="Search"
                     />
-                    <button type="submit"><Search /></button>
+                    {/* <button type="submit"><Search /></button> */}
                 </form>
             )}
             {shouldShowNavigationLinks &&
                 (<div className="navigation-links-container">
-                    <Link to="/home" className="nav-link white"><Home /></Link>
+                    {/* <Link to="/home" className="nav-link white"><Home /></Link>
                     <Link to="/profile" className="nav-link white"><AccountCircle /></Link>
                     <Link to="/messages" className="nav-link white"><Mail /></Link>
                     <Link to="/add-post" className="nav-link white"><AddCircle /></Link>
                     <Link to="/logout" className="nav-link white"><ExitToApp /></Link>
-                    {shouldShowAboutBtn && (<Link to="/about" className="button">About</Link>)}
+                    {shouldShowAboutBtn && (<Link to="/about" className="button">About</Link>)} */}
                 </div>)}
             {shouldShowBackBtn && (
                 <Link to="/" className="nav-link white back-btn">Go Back</Link>

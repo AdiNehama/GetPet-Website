@@ -1,8 +1,8 @@
 // AboutPage.js
-import React from 'react';
+import React, { useState } from 'react';
 import './AboutPage.css';
 import backgroundImage from '../../assets/images/aboutImg.jpeg';
-import PawIcon from '@material-ui/icons/Pets';
+// import PawIcon from '@material-ui/icons/Pets';
 
 const AboutPage = () => {
     return (

@@ -22,9 +22,14 @@
     padding-bottom: inherit;
     align-items: center;
     text-align: center;
+    margin-top: 5rem;
     border-radius: 15px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
     z-index: 1; /* Ensure the glass container is on top */
+  }
+  .profileImg{
+    width: 50%;
+    height: 50%;
   }
   
   h2 {
@@ -32,8 +37,21 @@
   }
   
   .register-form {
-    margin-top: 20px;
+    /* margin-top: 20px; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
+
+  .selectImgBtn{
+    color: white;
+    border: 1px solid white;
+    background-color: #C3B8B1;
+    margin-right: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+
   
   input[type="text"],
   input[type="email"],
@@ -87,6 +105,7 @@
     display: flex;
     flex-direction: column;
     cursor: pointer;
+    align-items: center;
   }
   
   .google-sign-up span {
@@ -96,5 +115,14 @@
   .google-sign-up img {
     width: 40px;
     height: 40px;
+  }
+
+  .register-btn{
+    color: white;
+    border: 1px solid white;
+    background-color: #C3B8B1;
+    margin-right: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
   }
   
