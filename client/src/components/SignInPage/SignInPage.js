@@ -3,11 +3,13 @@ import React, {useState} from 'react';
 import { useGoogleLogin } from '@react-oauth/google';
 import GoogleIcon from '@mui/icons-material/Google';
 import { IconButton } from '@mui/material';
+import {  useNavigate } from 'react-router-dom';
+import Cookies from 'universal-cookie';
 import './SignInPage.css';
 
 
-
 const SignInPage = () => {
+  const navigate = useNavigate();
 
   const login = useGoogleLogin({
     onSuccess: () => {console.log('Success')}
@@ -15,10 +17,6 @@ const SignInPage = () => {
   const [email, setEmail]= useState('');
   const [password, setPassword]= useState('');
 
-  const handleSignInWithEmail = () => {
-    // Implement email/password sign-in logic here
-    console.log("Signing in with email and password...");
-  };
 
   const handleChangeEmail = (event) => {
     setEmail(event.target.value); 
@@ -28,10 +26,47 @@ const SignInPage = () => {
     setPassword(event.target.value);
   }
 
-  const handleSignInWithGoogle = () => {
-    // Implement Google sign-in logic here
-    console.log("Signing in with Google...");
+  const handleSignInWithEmail = async (event) => {
+    event.preventDefault();
+    if(!email || !password){
+      console.log('All fields are required');
+      return;
+    }
+    
+    try {
+      const user = {
+      'email': email,
+      'password': password
+      }
+      const loginResponse = await fetch('http://localhost:8080/users/login', {
+         method: 'POST',
+         headers: {
+           'Content-Type': 'application/json',
+      },
+      body: JSON.stringify( user ),
+       });
+       const data = await loginResponse.json();
+      console.log(data);
+       if (loginResponse.ok) {
+          const cookies = new Cookies();
+          cookies.set('access_token', data.accessToken  );
+          localStorage.setItem('refresh_token', data.refreshToken);
+          console.log('User logged in successfully');
+          navigate('/home');
+        }
+        else {
+           console.log('Failed to login');
+       }
+          
+     }catch (error) {
+      console.error('login error:', error);
+    }
   };
+
+  // const handleSignInWithGoogle = () => {
+  //   // Implement Google sign-in logic here
+  //   console.log("Signing in with Google...");
+  // };
 
   return (
     <div className="sign-in-page">
