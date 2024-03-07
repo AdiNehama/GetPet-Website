@@ -2,7 +2,13 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import logoImg from '../../assets/images/backroundImg.jpeg';
-// import { AccountCircle, Mail, ExitToApp, AddCircle, Home, Search } from '@material-ui/icons'; // Import Material-UI Icons
+import { IconButton } from '@mui/material';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import HomeIcon from '@mui/icons-material/Home';
+import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
+import SearchIcon from '@mui/icons-material/Search';
+import LogoutIcon from '@mui/icons-material/Logout';
+import MailIcon from '@mui/icons-material/Mail';
 import './navBar.css';
 
 function NavigationBar() {
@@ -11,7 +17,7 @@ function NavigationBar() {
 
     const shouldShowAboutBtn = pathname === '/';
     const shouldShowSignInBtn = pathname === '/';
-    const shouldShowLogo = ['/home', '/signin', '/register'].includes(pathname);
+    const shouldShowLogo = ['/home','/profile', '/chat', '/upload','/signin', '/register'].includes(pathname);
     const shouldShowBackBtn = ['/about', '/signin', '/register'].includes(pathname);
     const shouldShowNavigationLinks = ['/home', '/profile', '/chat', '/upload'].includes(pathname);
     const shouldShowSearchForm = ['/home', '/profile', '/chat', '/upload'].includes(pathname);
@@ -47,17 +53,19 @@ function NavigationBar() {
                         onChange={handleSearchChange}
                         placeholder="Search"
                     />
-                    {/* <button type="submit"><Search /></button> */}
+                    <IconButton className='search-icon' type="submit">
+                    <SearchIcon />
+                    </IconButton>
                 </form>
             )}
             {shouldShowNavigationLinks &&
                 (<div className="navigation-links-container">
-                    {/* <Link to="/home" className="nav-link white"><Home /></Link>
-                    <Link to="/profile" className="nav-link white"><AccountCircle /></Link>
-                    <Link to="/messages" className="nav-link white"><Mail /></Link>
-                    <Link to="/add-post" className="nav-link white"><AddCircle /></Link>
-                    <Link to="/logout" className="nav-link white"><ExitToApp /></Link>
-                    {shouldShowAboutBtn && (<Link to="/about" className="button">About</Link>)} */}
+                <IconButton component={Link} to="/home" className="nav-link white"><HomeIcon /></IconButton>
+                <IconButton component={Link} to="/profile" className="nav-link white"><SentimentSatisfiedAltIcon /></IconButton>
+                <IconButton component={Link} to="/messages" className="nav-link white"><MailIcon  /></IconButton>
+                <IconButton component={Link} to="/add-post" className="nav-link white"><AddCircleOutlineIcon /></IconButton>
+                <IconButton component={Link} to="/logout" className="nav-link white"><LogoutIcon  /></IconButton>
+                    {shouldShowAboutBtn && (<Link to="/about" className="button">About</Link>)}
                 </div>)}
             {shouldShowBackBtn && (
                 <Link to="/" className="nav-link white back-btn">Go Back</Link>

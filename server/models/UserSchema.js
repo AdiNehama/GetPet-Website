@@ -1,4 +1,5 @@
-import mongoose from 'mongoose';
+var mongoose = require('mongoose');
+
 const { Schema } = mongoose;
 
 const UserSchema = new Schema({
@@ -17,5 +18,15 @@ const UserSchema = new Schema({
     password: {
         type: String,
         required: true
+    },
+    image:{
+        type: String,
+        required: true
+    },
+    tokens: {
+        type: [String]
     }
+    
 });
+
+module.exports = mongoose.model('User', UserSchema);
