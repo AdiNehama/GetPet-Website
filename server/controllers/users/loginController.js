@@ -1,5 +1,5 @@
-const UserSchema = require('../models/UserSchema');
-const { validateUser } = require('./loginUtils');
+const UserSchema = require('../../models/UserSchema');
+const { validateUser } = require('../../validation/loginUtils');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
 
@@ -43,7 +43,7 @@ exports.login = async (req, res) => {
     //save the user
     await existingUser.save();
     //send the tokens
-    res.status(200).json({ accessToken, refreshToken });
+    res.status(200).json({ accessToken, refreshToken, userId });
     
     } catch (error) {
         console.error('Error during login:', error.message);

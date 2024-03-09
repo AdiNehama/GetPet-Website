@@ -3,7 +3,7 @@
     flex-direction: column;
     background-color: #C3B8B1;
     height: 100vh;
-    
+    overflow-y: scroll;
 }
 .nav-bar{
   background-color: #EAE6E4;
