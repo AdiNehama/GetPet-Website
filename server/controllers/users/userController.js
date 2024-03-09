@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
-const User = require('../models/UserSchema');
-const validateUser = require('./util');
+const User = require('../../models/UserSchema');
+const validateUser = require('../../validation/util');
 
 
 // Controller function to handle user registration

@@ -1,4 +1,4 @@
-const UserSchema = require('../models/UserSchema');
+const UserSchema = require('../../models/UserSchema');
 
 exports.FetchAllUsers = async (req, res) => {
     try {

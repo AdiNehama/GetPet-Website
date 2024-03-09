@@ -51,6 +51,7 @@ const SignInPage = () => {
           const cookies = new Cookies();
           cookies.set('access_token', data.accessToken  );
           localStorage.setItem('refresh_token', data.refreshToken);
+          localStorage.setItem('user_id', data.userId);
           console.log('User logged in successfully');
           navigate('/home');
         }
