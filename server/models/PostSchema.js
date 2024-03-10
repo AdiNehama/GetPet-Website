@@ -6,6 +6,10 @@ const PostSchema = new Schema({
     userId: {
         type: String
     },
+    ownerName: { 
+        type: String,
+        required: true
+    },
     image:{
         type: String,
         required: true

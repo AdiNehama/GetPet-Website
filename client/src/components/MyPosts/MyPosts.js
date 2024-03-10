@@ -39,6 +39,7 @@ const MyPosts = () => {
                                 about={post.about}
                                 phone={post.phone}
                                 location={post.location}
+                                ownerName={post.ownerName}
                                 id={post._id}
                                 />
                         </Col>
