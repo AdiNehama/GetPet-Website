@@ -29,7 +29,6 @@ const SignInPage = () => {
   const handleSignInWithEmail = async (event) => {
     event.preventDefault();
     if(!email || !password){
-      console.log('All fields are required');
       return;
     }
     
@@ -46,18 +45,13 @@ const SignInPage = () => {
       body: JSON.stringify( user ),
        });
        const data = await loginResponse.json();
-      console.log(data);
        if (loginResponse.ok) {
           const cookies = new Cookies();
           cookies.set('access_token', data.accessToken  );
           localStorage.setItem('refresh_token', data.refreshToken);
           localStorage.setItem('user_id', data.userId);
-          console.log('User logged in successfully');
           navigate('/home');
         }
-        else {
-           console.log('Failed to login');
-       }
           
      }catch (error) {
       console.error('login error:', error);

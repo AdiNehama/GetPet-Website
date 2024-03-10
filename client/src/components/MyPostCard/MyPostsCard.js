@@ -7,14 +7,14 @@ import { useNavigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import './MyPostsCard.css';
 
-function PostCard(props) {
+function MyPostCard(props) {
   const navigate = useNavigate();
   const cookies = new Cookies();
+
   const onEditButtonClick = () => {
     navigate('/editpost/' + props.id)
   }
   const onButtonDeleteChange = () => {
-
     fetch(`http://localhost:8080/posts/${props.id}`, {
       method: 'DELETE',
       headers: {
@@ -23,7 +23,6 @@ function PostCard(props) {
       }
     }).then((res) => res.json())
       .then(() => {
-        console.log("Successfully deleted");
         window.location.reload();
       });
   }
@@ -80,4 +79,4 @@ function PostCard(props) {
   );
 }
 
-export default PostCard;
+export default MyPostCard;

@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Cookies from 'universal-cookie';
-import PostCard from '../MyPostCard/MyPostsCard';
+import MyPostCard from '../MyPostCard/MyPostsCard';
 import { Container, Row, Col } from 'react-bootstrap'
-
-
-
 
 const MyPosts = () => {
     const [posts, setPosts] = useState([]);
@@ -12,7 +9,6 @@ const MyPosts = () => {
 
     useEffect(() => {
         const cookies = new Cookies();
-        console.log(cookies.get('access_token'));
         fetch(`http://localhost:8080/posts/${uid}`, {
             method: 'GET',
             headers: {
@@ -25,27 +21,25 @@ const MyPosts = () => {
             });
     }, []);
 
-    console.log(posts);
-
     return (
-            <Container >
-                <Row>
-                    {posts.map((post) => (
-                        <Col>
-                            <PostCard key={post._id} className= 'post-card'
-                                image={post.image}
-                                kind={post.kind}
-                                birthDate={post.birthDate}
-                                about={post.about}
-                                phone={post.phone}
-                                location={post.location}
-                                ownerName={post.ownerName}
-                                id={post._id}
-                                />
-                        </Col>
-                    ))}
-                </Row>
-            </Container>
+        <Container >
+            <Row>
+                {posts.map((post) => (
+                    <Col>
+                        <MyPostCard key={post._id} className='post-card'
+                            image={post.image}
+                            kind={post.kind}
+                            birthDate={post.birthDate}
+                            about={post.about}
+                            phone={post.phone}
+                            location={post.location}
+                            ownerName={post.ownerName}
+                            id={post._id}
+                        />
+                    </Col>
+                ))}
+            </Row>
+        </Container>
     );
 }
 

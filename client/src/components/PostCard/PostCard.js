@@ -8,7 +8,10 @@ import './PostCard.css';
 
 function PostCard(props) {
   const navigate = useNavigate();
-  const age = new Date().getFullYear() - new Date(props.birthDate).getFullYear();
+  const dateArr = props.birthDate.split('/');
+  const date = new Date(dateArr[2], dateArr[1] - 1, dateArr[0]);
+  const age = new Date().getFullYear() - date.getFullYear();
+
   const handleClick = () => {
     navigate('/chat');
   };
@@ -54,6 +57,12 @@ function PostCard(props) {
                 Owner Name:
             </span>
             {props.ownerName}
+           </div>
+           <div className="post_info">
+            <span>
+                Good with children:
+            </span>
+            {props.goodWithChildren} / 5
            </div>
         </Card.Text>
         <IconButton variant="primary" onClick={handleClick}><ChatIcon/></IconButton>

@@ -35,23 +35,18 @@ const RegisterPage = () => {
     event.preventDefault();
      // Form validation
      if (!name || !email || !password || !phone || !ConfirmPassword || !imgSrc ) {
-      console.log('All fields are required');
       return;
     }
     if (password !== ConfirmPassword) {
-      console.log('Passwords do not match');
       return;
     }
     if(phone.length !== 10) {
-      console.log('Phone number is too short or too long');
       return;
     }
     if (password.length < 6) {
-      console.log('Password is too short');
       return;
     }
     if(!isValidEmail(email)) {
-      console.log('Invalid email format');
       return;
     }
     
@@ -75,9 +70,7 @@ const RegisterPage = () => {
         body: JSON.stringify(formData),
       });
       const data = await response.json();
-      console.log(data); // Handle server response
       if(response.ok){
-        console.log('User created successfully');
         navigate('/signin');
         
       }
@@ -99,7 +92,6 @@ const RegisterPage = () => {
   
 
   const imgSelected = (event) => {
-    console.log(event.target.files[0]);
     setImageSrc(URL.createObjectURL(event.target.files[0]));
   }
 
