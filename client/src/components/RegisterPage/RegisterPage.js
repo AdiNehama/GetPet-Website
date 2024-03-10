@@ -78,7 +78,7 @@ const RegisterPage = () => {
       console.log(data); // Handle server response
       if(response.ok){
         console.log('User created successfully');
-        navigate('/home');
+        navigate('/signin');
         
       }
     } catch (error) {

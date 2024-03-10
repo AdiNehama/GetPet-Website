@@ -13,6 +13,8 @@ router.get('/',authenticate, allUsers.FetchAllUsers);
 router.post('/register', userController.registerUser);
 // Route to handle user login
 router.post('/login', loginController.login);
+//logout route
+
 
 
 

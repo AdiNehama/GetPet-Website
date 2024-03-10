@@ -35,7 +35,9 @@ const HomePage = () => {
                                 birthDate={post.birthDate}
                                 about={post.about}
                                 phone={post.phone}
-                                location={post.location}/>
+                                location={post.location}
+                                ownerName={post.ownerName}
+                                />
                         </Col>
                     ))}
                 </Row>

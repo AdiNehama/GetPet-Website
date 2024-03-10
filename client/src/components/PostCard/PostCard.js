@@ -49,6 +49,12 @@ function PostCard(props) {
             </span>
             {props.location}
            </div>
+           <div className="post_info">
+            <span>
+                Owner Name:
+            </span>
+            {props.ownerName}
+           </div>
         </Card.Text>
         <IconButton variant="primary" onClick={handleClick}><ChatIcon/></IconButton>
       </Card.Body>
