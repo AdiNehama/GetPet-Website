@@ -18,7 +18,6 @@ exports.login = async (req, res) => {
         console.error(validationResult.error);
         return;
     }
-    console.log('valisation success');
     try {
         //get the user
     const existingUser = await UserSchema.findOne({ email });

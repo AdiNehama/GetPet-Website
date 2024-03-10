@@ -7,8 +7,6 @@ exports.getPostByPostId = async (req, res) => {
         try {
             const post = await PostSchema.findOne({ _id });
 
-            console.log(post);
-
             res.status(200).json({ message: 'Success', post })
         } catch (error) {
             res.status(500).json({ error: error.message });

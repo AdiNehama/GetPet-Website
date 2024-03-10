@@ -31,8 +31,7 @@ function NavigationBar() {
     // Function to handle search form submission
     const handleSearchSubmit = (event) => {
         event.preventDefault();
-        // Add search functionality here
-        console.log('Search', searchTerm);
+        // TODO: Add search functionality here
         // Clear search term after submission if needed
         setSearchTerm('');
     };

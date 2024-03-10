@@ -17,7 +17,7 @@ exports.registerUser = async (req, res) => {
         image
     }
     const validationResult = await validateUser(user, res);
-    
+
     if (!validationResult) {
         // handle validation error
         console.error(validationResult.error);
@@ -25,14 +25,10 @@ exports.registerUser = async (req, res) => {
         return;
     }
 
-    //validation success log
-    console.log('Validation success');
-
-    // TODO: Encrypt the password before sending it to the database.
+    // Encrypt the password before sending it to the database.
     const hashedPassword = await bcrypt.hash(password, 10);
-    
-   
-    // TODO: Save the data to the DB.
+
+    // Save the data to the DB.
     try {
         const newUser = new User({
             name,
@@ -40,17 +36,15 @@ exports.registerUser = async (req, res) => {
             password: hashedPassword,
             phone,
             image,
-          
-         });
-         await newUser.save();
-         //success message
-            res.status(201).json({ message: 'User created successfully' });
-            
-        
+
+        });
+        await newUser.save();
+        //success message
+        res.status(201).json({ message: 'User created successfully' });
     } catch (error) {
         console.error('Error during registration:', error.message);
         res.status(500).json({ error: 'Internal server error' });
-        
+
     }
 };
 

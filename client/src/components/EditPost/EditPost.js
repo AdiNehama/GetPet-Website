@@ -26,9 +26,7 @@ const EditPost = (props) => {
   const [ownerName, setOwnerName] = useState();
   const [imgSrc, setImgSrc] = useState();
 
-
   useEffect(() => {
-    console.log(cookies.get('access_token'));
     fetch(`http://localhost:8080/posts/postbyid/${postId}`, {
       method: 'GET',
       headers: {
@@ -49,7 +47,6 @@ const EditPost = (props) => {
   }, []);
 
   const imgSelected = (event) => {
-    console.log(event.target.files[0]);
     setImgSrc(URL.createObjectURL(event.target.files[0]));
   }
   const handleEditInfo = (event) => {
@@ -71,7 +68,6 @@ const EditPost = (props) => {
       })
     }).then((res) => res.json())
       .then(() => {
-        console.log("updated post");
         navigate('/myposts')
       });
 
