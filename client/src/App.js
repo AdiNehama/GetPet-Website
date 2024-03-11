@@ -7,6 +7,7 @@ import RegisterPage from './components/RegisterPage/RegisterPage';
 import HomePage from './components/HomePage/HomePage';
 import NavBar from './components/NavBar/navBar';
 import MyPosts from './components/MyPosts/MyPosts';
+import UploadPost from './components/UploadPostPage/UploadPostPage'
 import EditPost from './components/EditPost/EditPost';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
@@ -27,6 +28,7 @@ function App() {
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/home" element={<HomePage />} />
             <Route path="/myposts" element={<MyPosts />} />
+            <Route path="/upload" element={<UploadPost/>}/>
             <Route path="/editpost/:postId" element={<EditPost />} />
           </Routes>
         </div>
