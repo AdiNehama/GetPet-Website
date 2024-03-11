@@ -5,6 +5,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+var multer = require('multer');
+
 const cors = require('cors');
 // const MongoDBStore = require("connect-mongodb-session")(session);
 
@@ -17,25 +19,6 @@ var app = express();
 
 connectDB();
 
-// //Create a session for the user
-// const store = new MongoDBStore({
-//   uri: process.env.MONGO_URI, 
-//   collection: 'sessions',
-//   mongooseConnection: mongoose.connection
-// });
-
-// // Multer Configuration
-// const storage = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//     cb(null, 'public/')
-//   },
-//   filename: function (req, file, cb) {
-//     const ext = file.originalname.split('.').filter(Boolean).slice(1).join('.');
-//     cb(null, Date.now() + '.' + ext);
-//   }
-// });
-// var upload = multer({ storage: storage });
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -44,6 +27,21 @@ app.set('view engine', 'jade');
 const corsOptions = {
   origin: 'http://localhost:3001',
 };
+
+//upload file
+const storage = multer.diskStorage ({
+  destination : function (req, file, cb) {
+  cb(null, 'public/')
+  },
+  filename: function (req, file, cb) {
+  const ext = file.originalname .split('.')
+  . filter(Boolean) // removes empty extensions (e.g. `filename...txt`)
+  . slice(1)
+  . join('.')
+  cb(null, Date.now() + "." + ext)
+  }
+ })
+ const upload = multer({ storage: storage });
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -59,12 +57,12 @@ app.use('/posts', postsRouter);
 
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -74,7 +72,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.listen(8080, function() {
+app.listen(8080, function () {
   console.log('Server is running on port 8080');
 });
 

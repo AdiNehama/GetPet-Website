@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { useGoogleOAuth } from '@react-oauth/google';
 import GoogleIcon from '@mui/icons-material/Google';
 import { IconButton } from '@mui/material';
@@ -13,53 +13,54 @@ const RegisterPage = () => {
 
   const { signup } = useGoogleOAuth();
 
-  const [name, setName]= useState('');
-  const [email, setEmail]= useState('');
-  const [password, setPassword]= useState('');
-  const [phone, setPhone]= useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [phone, setPhone] = useState('');
   const [ConfirmPassword, setComfirmPassword] = useState('');
   const [imgSrc, setImageSrc] = useState(''); // State for the image source
+  const [file, setFile] = useState('');
 
   function isValidEmail(email) {
     return /\S+@\S+\.\S+/.test(email);
   }
-   
-  const handelChangeName = (name) => {setName(name.target.value);};
-  const handleChangeEmail = (email) => {setEmail(email.target.value);};
-  const handleChangePassword = (password) => {setPassword(password.target.value);};
-  const handleChangePhone = (phone) =>{setPhone(phone.target.value);};
-  const handleChangeConfirmPassword = (ConfirmPassword) =>{setComfirmPassword(ConfirmPassword.target.value);};
 
-  const handleRegisterWithEmail = async(event) => {
+  const handelChangeName = (name) => { setName(name.target.value); };
+  const handleChangeEmail = (email) => { setEmail(email.target.value); };
+  const handleChangePassword = (password) => { setPassword(password.target.value); };
+  const handleChangePhone = (phone) => { setPhone(phone.target.value); };
+  const handleChangeConfirmPassword = (ConfirmPassword) => { setComfirmPassword(ConfirmPassword.target.value); };
+
+  const handleRegisterWithEmail = async (event) => {
     // Register
     event.preventDefault();
-     // Form validation
-     if (!name || !email || !password || !phone || !ConfirmPassword || !imgSrc ) {
+    // Form validation
+    if (!name || !email || !password || !phone || !ConfirmPassword || !imgSrc) {
       return;
     }
     if (password !== ConfirmPassword) {
       return;
     }
-    if(phone.length !== 10) {
+    if (phone.length !== 10) {
       return;
     }
     if (password.length < 6) {
       return;
     }
-    if(!isValidEmail(email)) {
+    if (!isValidEmail(email)) {
       return;
     }
-    
 
-     // Create form data to send to the server
-     const formData = {
+
+    // Create form data to send to the server
+    const formData = {
       "email": email,
       "password": password,
       'confirmPassword': ConfirmPassword,
       'name': name,
       'phone': phone,
       'image': imgSrc
-     }
+    }
 
     try {
       const response = await fetch('http://localhost:8080/users/register', {
@@ -70,64 +71,86 @@ const RegisterPage = () => {
         body: JSON.stringify(formData),
       });
       const data = await response.json();
-      if(response.ok){
+      if (response.ok) {
         navigate('/signin');
-        
+
       }
     } catch (error) {
       console.error(error);
     }
   };
 
- 
+
 
   const handleRegisterWithGoogle = () => {
     // Implement Google registration logic here
     console.log("Registering with Google...");
   };
   const handelUploadProfileImage = () => {
-    
+    console.log(file)
+    const formData = new FormData();
+    if (file) {
+      formData.append('file', file);
+      fetch('http://localhost:8080/files',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'image/jpeg'
+
+          },
+          body: formData
+        }.then(res => {
+          console.log(res);
+          setImageSrc(res.data.url);
+        }).catch(err => {
+          console.log(err);
+        })
+       );
+    }
   };
 
-  
 
-  const imgSelected = (event) => {
-    setImageSrc(URL.createObjectURL(event.target.files[0]));
+
+const imgSelected = (event) => {
+  setImageSrc(URL.createObjectURL(event.target.files[0]));
+  if (event.target.files && event.target.files.length > 0) {
+    setFile(event.target.files[0]);
   }
+}
 
-  return (
-    <div className="register-page">
-      <div className="glass-container">
-        <h2>Register</h2>
-        <form className="register-form" onSubmit={handleRegisterWithEmail}>
-          <img src={imgSrc? imgSrc : profile} alt='' className='profileImg' />
-          <span>Select profile image</span>
-          <IconButton
-            component="label"
-            htmlFor="file"
-            className="selectImgBtn"
-            onClick={handelUploadProfileImage}
+return (
+  <div className="register-page">
+    <div className="glass-container">
+      <h2>Register</h2>
+      <form className="register-form" onSubmit={handleRegisterWithEmail}>
+        <img src={imgSrc ? imgSrc : profile} alt='' className='profileImg' />
+        <span>Select profile image</span>
+        <IconButton
+          component="label"
+          htmlFor="file"
+          className="selectImgBtn"
+          onClick={handelUploadProfileImage}
         >
-            <AddPhotoAlternateIcon />
+          <AddPhotoAlternateIcon />
         </IconButton>
-          <input id="file" type="file"  onChange={imgSelected} style={{opacity: 0}}></input>
-          <input  className='name-input' type="text" onChange={handelChangeName} value={name} placeholder="Name" required />
-          <input className='email-register' type="email" onChange={handleChangeEmail} value={email} placeholder="Email" required />
-          <input className='tel-register' type="tel" onChange={handleChangePhone} value={phone} placeholder="Phone Number" required />
-          <input className='password-register' type="password" onChange={handleChangePassword} value={password} placeholder="Password" required />
-          <input className='confirm-register' type="password" onChange={handleChangeConfirmPassword} value={ConfirmPassword} placeholder="Confirm Password" required />
-          <button className='register-btn' type="submit">Submit</button>
-        </form>
-        <div className="or-text-register">
-          <span>or</span>
-        </div>
-        <div className="google-sign-up">
-          <span>Sign up with Google</span>
-          <IconButton sx={{width: 'fit-content'}}><GoogleIcon/></IconButton>
-        </div>
+        <input id="file" type="file" onChange={imgSelected} style={{ opacity: 0 }}></input>
+        <input className='name-input' type="text" onChange={handelChangeName} value={name} placeholder="Name" required />
+        <input className='email-register' type="email" onChange={handleChangeEmail} value={email} placeholder="Email" required />
+        <input className='tel-register' type="tel" onChange={handleChangePhone} value={phone} placeholder="Phone Number" required />
+        <input className='password-register' type="password" onChange={handleChangePassword} value={password} placeholder="Password" required />
+        <input className='confirm-register' type="password" onChange={handleChangeConfirmPassword} value={ConfirmPassword} placeholder="Confirm Password" required />
+        <button className='register-btn' type="submit">Submit</button>
+      </form>
+      <div className="or-text-register">
+        <span>or</span>
+      </div>
+      <div className="google-sign-up">
+        <span>Sign up with Google</span>
+        <IconButton sx={{ width: 'fit-content' }}><GoogleIcon /></IconButton>
       </div>
     </div>
-  );
+  </div>
+);
 };
 
 export default RegisterPage;
