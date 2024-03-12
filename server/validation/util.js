@@ -14,6 +14,12 @@ const validateUser = async (user, res) => {
 
     return false;
   }
+  if(phone.length !==10) {
+    res.status(400).json({ message: 'phone incorrect' });
+
+    return false;
+
+  }
   
 // Check if user with the same email already exists
 const existingUser = await UserSchema.findOne({ email });

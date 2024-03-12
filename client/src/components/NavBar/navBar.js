@@ -17,10 +17,10 @@ function NavigationBar() {
 
     const shouldShowAboutBtn = pathname === '/';
     const shouldShowSignInBtn = pathname === '/';
-    const shouldShowLogo = ['/home','/profile','/myposts', '/chat', '/upload','/signin', '/register'].includes(pathname) || ['/editpost'].includes(pathname.split('/').slice(0, -1).join('/'));
+    const shouldShowLogo = ['/home','/editprofile','/profile','/myposts', '/chat', '/upload','/signin', '/register'].includes(pathname) || ['/editpost'].includes(pathname.split('/').slice(0, -1).join('/'));
     const shouldShowBackBtn = ['/about', '/signin', '/register'].includes(pathname);
-    const shouldShowNavigationLinks = ['/home', '/profile' ,'/myposts', '/chat', '/upload'].includes(pathname) || ['/editpost'].includes(pathname.split('/').slice(0, -1).join('/'));
-    const shouldShowSearchForm = ['/home', '/profile', '/myposts', '/chat', '/upload'].includes(pathname) || ['/editpost'].includes(pathname.split('/').slice(0, -1).join('/'));
+    const shouldShowNavigationLinks = ['/home','/editprofile', '/profile' ,'/myposts', '/chat', '/upload'].includes(pathname) || ['/editpost'].includes(pathname.split('/').slice(0, -1).join('/'));
+    const shouldShowSearchForm = ['/home', '/editprofile' , '/profile', '/myposts', '/chat', '/upload'].includes(pathname) || ['/editpost'].includes(pathname.split('/').slice(0, -1).join('/'));
     const shouldShowSystemButtons = shouldShowAboutBtn || shouldShowSignInBtn;
 
     // Function to handle search term change
