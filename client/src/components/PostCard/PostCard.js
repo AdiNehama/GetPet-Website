@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import ChatIcon from '@mui/icons-material/Chat';
 import IconButton from '@mui/material/IconButton';
 import { useNavigate } from 'react-router-dom';
-
 import './PostCard.css';
 
 function PostCard(props) {
+  const [image, setImage] = useState('');
+  const [allImages, setAllImages] = useState('');
   const navigate = useNavigate();
   const dateArr = props.birthDate.split('/');
   const date = new Date(dateArr[2], dateArr[1] - 1, dateArr[0]);
@@ -18,54 +19,54 @@ function PostCard(props) {
 
   return (
     <Card className="post-Card" style={{ width: '18rem', marginTop: '20px' }}>
-      <Card.Img variant="top" src={props.image}/>
+      <Card.Img variant="top" src={props.image} />
       <Card.Body>
         <Card.Title></Card.Title>
         <Card.Text as="div">
-           <div className="post_info">
+          <div className="post_info">
             <span>
-                Kind:
+              Kind:
             </span>
             {props.kind}
-           </div>
-           <div className="post_info">
+          </div>
+          <div className="post_info">
             <span>
-                Age:
+              Age:
             </span>
             {age}
-           </div>
-           <div className="post_info">
+          </div>
+          <div className="post_info">
             <span>
-                About:
+              About:
             </span>
             {props.about}
-           </div>
-           <div className="post_info">
+          </div>
+          <div className="post_info">
             <span>
-                Phone:
+              Phone:
             </span>
             {props.phone}
-           </div>
-           <div className="post_info">
+          </div>
+          <div className="post_info">
             <span>
-                Location:
+              Location:
             </span>
             {props.location}
-           </div>
-           <div className="post_info">
+          </div>
+          <div className="post_info">
             <span>
-                Owner Name:
+              Owner Name:
             </span>
             {props.ownerName}
-           </div>
-           <div className="post_info">
+          </div>
+          <div className="post_info">
             <span>
-                Good with children:
+              Good with children:
             </span>
             {props.goodWithChildren} / 5
-           </div>
+          </div>
         </Card.Text>
-        <IconButton variant="primary" onClick={handleClick}><ChatIcon/></IconButton>
+        <IconButton variant="primary" onClick={handleClick}><ChatIcon /></IconButton>
       </Card.Body>
     </Card>
   );

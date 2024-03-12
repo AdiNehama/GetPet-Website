@@ -61,7 +61,7 @@ function NavigationBar() {
                 (<div className="navigation-links-container">
                 <IconButton component={Link} to="/home" className="nav-link white"><HomeIcon /></IconButton>
                 <IconButton component={Link} to="/profile" className="nav-link white"><SentimentSatisfiedAltIcon /></IconButton>
-                <IconButton component={Link} to="/messages" className="nav-link white"><ChatIcon /></IconButton>
+                <IconButton component={Link} to="/chat" className="nav-link white"><ChatIcon /></IconButton>
                 <IconButton component={Link} to="/upload" className="nav-link white"><AddCircleOutlineIcon /></IconButton>
                 <IconButton component={Link} to="/logout" className="nav-link white"><LogoutIcon  /></IconButton>
                     {shouldShowAboutBtn && (<Link to="/about" className="button">About</Link>)}

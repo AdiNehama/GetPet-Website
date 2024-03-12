@@ -28,4 +28,6 @@ router.delete('/:postId', authenticate, deletePost.DeletePost);
 router.get('/postbyid/:postId', authenticate, postByPostId.getPostByPostId);
 
 
+
+
 module.exports = router;
