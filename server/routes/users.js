@@ -3,6 +3,8 @@ var userController = require('../controllers/users/userController');
 var loginController = require('../controllers/users/loginController');
 const authenticate = require('../middelware/authMiddelware')
 var allUsers = require('../controllers/users/allUsersContoller');
+const getUserById = require('../controllers/users/getUserByIdController');
+const updateUser = require('../controllers/users/updateUserController');
 
 
 var router = express.Router();
@@ -14,6 +16,11 @@ router.post('/register', userController.registerUser);
 // Route to handle user login
 router.post('/login', loginController.login);
 //logout route
+
+//get user by uid
+router.get('/:userId',authenticate, getUserById.getOneUserById); 
+//edit user information
+router.put('/:userId',authenticate, updateUser.UpdateUser);
 
 
 

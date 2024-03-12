@@ -15,7 +15,6 @@ const EditPost = (props) => {
   const path = myLocation.pathname.split('/');
   const postId = path[path.length - 1];
   const cookies = new Cookies();
-  const imageUrl= `${serverUrl}:${port}/images/${props.image}`
 
   //const use state to each filed
   const [kind, setKind] = useState();
@@ -72,6 +71,8 @@ const EditPost = (props) => {
     }).then((res) => res.json())
       .then(() => {
         navigate('/myposts')
+      }).catch((err) => {
+
       });
 
   };

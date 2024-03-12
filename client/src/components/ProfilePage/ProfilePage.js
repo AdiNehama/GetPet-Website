@@ -1,61 +1,49 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import Cookies from 'universal-cookie';
 import './ProfilePage.css';
 import profile from '../../assets/images/user-default-96.png';
 import { IconButton } from '@mui/material';
-import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+import EditIcon from '@mui/icons-material/Edit';
 import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
-  const [imgSrc, setImageSrc] = useState('');
-  const [user, setUser] = useState({
-    _id: '',
-    name: '',
-    phone: '',
-    password: '',
-    confirmPassword: '',
-    image: null,
-  });
-
   const navigate = useNavigate();
+  const serverUrl = process.env.REACT_APP_SERVER_URL;
+  const port = process.env.REACT_APP_SERVER_PORT;
+  const cookies = new Cookies();
+  const userId = localStorage.user_id;
+  const [image, setImage] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
 
-  const handleSaveChanges = async (e) => {
-    e.preventDefault();
-
-    if (user.password !== user.confirmPassword) {
-      console.error('Password and Confirm Password do not match');
-      // Optionally, provide feedback to the user
-      return;
-    }
-
-    try {
-      const formData = new FormData();
-      formData.append('_id', user._id);
-      formData.append('name', user.name);
-      formData.append('phone', user.phone);
-      formData.append('password', user.password);
-      
-      if (user.image) {
-        formData.append('image', user.image);
+  useEffect(() => {
+    fetch(`http://localhost:8080/users/${userId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': `JWT ${cookies.get('access_token')}`
       }
+    }).then((res) => res.json())
+      .then((data) => {
+        const { name, email, phone } = data;
+        setName(name);
+        setEmail(email);
+        setPhone(phone);
+        const imageUrl = `${serverUrl}:${port}/images/${data.image}`;
+        setImage(imageUrl);
+      });
+  }, []);
 
-      const response = await axios.post('/api/user/update-profile', formData, { withCredentials: true });
 
-      console.log('Changes saved successfully!', response.data);
-      // Optionally, provide feedback to the user
-    } catch (error) {
-      console.error('Error saving changes:', error.message);
-      // Optionally, provide feedback to the user
-    }
+  const onEditButtonClick = async (event) => {
+    navigate('/editprofile')
+
   };
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    setImageSrc(URL.createObjectURL(file));
-    setUser(prevUser => ({ ...prevUser, image: file }));
-  };
 
-  const handleClick = () => {
+
+  const handleMyPostBtn = () => {
     navigate('/myposts');
   };
 
@@ -64,55 +52,21 @@ const Profile = () => {
       <div className="glass-container-profile">
         <h1>Profile</h1>
         <div className="profile-options">
-          <img src={imgSrc || profile} alt='' className='preview-img' />
-          <span>Select profile image</span>
-          <IconButton
-            component="label"
-            htmlFor="file"
-            className="select-img-btn"
-          >
-            <AddPhotoAlternateIcon />
-          </IconButton>
-          <input id="file" type="file" onChange={handleImageChange} style={{ opacity: 0 }} />
-          {user.image && <img src={URL.createObjectURL(user.image)} alt="Profile Preview" className="preview-img" />}
-          <button onClick={handleClick}>My Posts</button>
-          <button onClick={() => { /* Navigate to "Upload a Pet" page */ }}>Upload a Pet</button>
+          <img src={image ? image : profile} alt='' className='preview-img' />
+          <button className='my-posts-btn' onClick={handleMyPostBtn}>My Posts</button>
+          <button className='edit-post-btn' onClick={() => {
+            navigate('/upload')
+          }}>Upload new post</button>
         </div>
-        <form onSubmit={handleSaveChanges}>
-          <div className="profile-details">
-            <input
-              className='username-input'
-              type="text"
-              name='username'
-              placeholder="Username"
-              value={user.name}
-              onChange={(e) => setUser(prevUser => ({ ...prevUser, name: e.target.value }))}
-            />
-            <input
-              className='phone-input'
-              type="tel"
-              name='phone'
-              placeholder="Phone Number"
-              value={user.phone}
-              onChange={(e) => setUser(prevUser => ({ ...prevUser, phone: e.target.value }))}
-            />
-            <input
-              className='password-input'
-              type="password"
-              name='password'
-              placeholder="Password"
-              value={user.password}
-              onChange={(e) => setUser(prevUser => ({ ...prevUser, password: e.target.value }))}
-            />
-            <input
-              className='confirm-password-input'
-              type="password"
-              name='confirmPassword'
-              placeholder="Confirm Password"
-              value={user.confirmPassword}
-              onChange={(e) => setUser(prevUser => ({ ...prevUser, confirmPassword: e.target.value }))}
-            />
-            <button type="submit">Save Changes</button>
+        <form >
+          <div >
+            <div className="profile-details">{name}</div>
+            <div className="profile-details">{email}</div>
+            <div className="profile-details">{phone}</div>
+            <div className="edit-profile">
+              <span>edit your profile</span>
+            </div>
+            <IconButton variant="primary" onClick={onEditButtonClick}><EditIcon /></IconButton>
           </div>
         </form>
       </div>

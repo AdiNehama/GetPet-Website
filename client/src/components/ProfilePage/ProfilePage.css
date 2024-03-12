@@ -28,6 +28,7 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
     z-index: 1;
     text-align: center;
+    margin-top: 18rem;
   }
   
   .profile-options {
@@ -41,6 +42,29 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-weight: bold;
+  }
+  .edit-profile {
+    color: #fff;
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    height: 1rem;
+    width: 100%;
+  }
+  
+  .edit-profile > span {
+    line-height: 0.625rem;
+  }
+  
+  .edit-profile::after,
+  .edit-profile::before {
+    content: '';
+    flex: 1;
+    height: 1px;
+    border-bottom: 1px solid #fff;;
   }
   
   
@@ -53,14 +77,26 @@
     border-radius: 4px;
   }
   
-  button {
+  
+  .my-posts-btn{
     background-color: #C3B8B1;
     color: #ffffff;
     border: 0.2px white solid;
     cursor: pointer;
+    margin: 10px;
+  }
+  .edit-post-btn{
+    background-color: #C3B8B1;
+    color: #ffffff;
+    border: 0.2px white solid;
+    cursor: pointer;
+    margin: 10px;
+  }
+  .edit-post-btn:hover{
+    background-color: #75665D;
   }
   
-  button:hover {
+  .my-posts-btn:hover {
     background-color: #75665D;
   }
   
