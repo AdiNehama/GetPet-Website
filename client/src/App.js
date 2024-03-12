@@ -10,6 +10,7 @@ import MyPosts from './components/MyPosts/MyPosts';
 import UploadPost from './components/UploadPostPage/UploadPostPage'
 import EditPost from './components/EditPost/EditPost';
 import ChatPage from './components/ChatPage/ChatPage';
+import ProfilePage from './components/ProfilePage/ProfilePage'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import GoogleAuth from './components/GoogleAuth/GoogleAuth';
@@ -32,6 +33,7 @@ function App() {
             <Route path="/upload" element={<UploadPost/>}/>
             <Route path="/chat" element={<ChatPage />} />
             <Route path="/editpost/:postId" element={<EditPost />} />
+            <Route path="/profile" element={<ProfilePage />} />
           </Routes>
         </div>
       </Router>
