@@ -13,7 +13,7 @@
   overflow-y: auto; /* Allow vertical scrolling */
 }
 
-.glass-container {
+.glass-container-edit {
     display: flex;
     flex-direction: column;
     max-width: 330px;

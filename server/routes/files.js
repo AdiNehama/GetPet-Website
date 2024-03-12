@@ -27,20 +27,5 @@ router.post('/', upload.single("image"), async (req, res) => {
     }
 });
 
-router.get('/', async (req, res) => {
-    try {
-        Images.find({})
-            .then(data => {
-                res.send({ status: 'ok', data: data });
-            }
-            )
-
-    } catch (error) {
-        res.json({ status: error });
-    }
-
-})
-
-
 
 module.exports = router;

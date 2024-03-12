@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Cookies from 'universal-cookie';
 import PostCard from '../PostCard/PostCard';
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap';
+import './HomePage.css';
 
 const HomePage = () => {
     const [posts, setPosts] = useState([]);
-    const [image, setImage] = useState([]);
-    const [allImages, setAllImages] = useState([]);
 
     useEffect(() => {
         const cookies = new Cookies();
@@ -40,7 +39,7 @@ const HomePage = () => {
         <Container >
             <Row>
                 {posts.map((post) => (
-                    <Col>
+                    <Col className='post-card-container'>
                         <PostCard key={'post' + post._id} className='post-card'
                             image={post.image}
                             kind={post.kind}

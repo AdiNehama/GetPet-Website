@@ -6,12 +6,13 @@ import { useNavigate } from 'react-router-dom';
 import './PostCard.css';
 
 function PostCard(props) {
-  const [image, setImage] = useState('');
-  const [allImages, setAllImages] = useState('');
+  const serverUrl = process.env.REACT_APP_SERVER_URL;
+  const port = process.env.REACT_APP_SERVER_PORT;
   const navigate = useNavigate();
   const dateArr = props.birthDate.split('/');
   const date = new Date(dateArr[2], dateArr[1] - 1, dateArr[0]);
   const age = new Date().getFullYear() - date.getFullYear();
+  const imageUrl= `${serverUrl}:${port}/images/${props.image}`
 
   const handleClick = () => {
     navigate('/chat');
@@ -19,7 +20,7 @@ function PostCard(props) {
 
   return (
     <Card className="post-Card" style={{ width: '18rem', marginTop: '20px' }}>
-      <Card.Img variant="top" src={props.image} />
+      <Card.Img className='header-img' variant="top" src={imageUrl} />
       <Card.Body>
         <Card.Title></Card.Title>
         <Card.Text as="div">

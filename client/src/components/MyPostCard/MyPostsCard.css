@@ -2,3 +2,7 @@
     font-weight: 'bold';
     margin-right: 1ch;
 }
+.my-post-card-img {
+    object-fit: cover;
+    height: 10rem;
+}
