@@ -7,19 +7,16 @@ import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import { useNavigate } from 'react-router-dom';
 import './RegisterPage.css';
 
-
 const RegisterPage = () => {
   const navigate = useNavigate();
-
+  const [imgPreview, setImgPreview] = useState('');
   const { signup } = useGoogleOAuth();
-
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [phone, setPhone] = useState('');
   const [ConfirmPassword, setComfirmPassword] = useState('');
-  const [imgSrc, setImageSrc] = useState(''); // State for the image source
-  const [file, setFile] = useState('');
+  const [image, setImage] = useState(''); // State for the image source
 
   function isValidEmail(email) {
     return /\S+@\S+\.\S+/.test(email);
@@ -35,7 +32,7 @@ const RegisterPage = () => {
     // Register
     event.preventDefault();
     // Form validation
-    if (!name || !email || !password || !phone || !ConfirmPassword || !imgSrc) {
+    if (!name || !email || !password || !phone || !ConfirmPassword || !image) {
       return;
     }
     if (password !== ConfirmPassword) {
@@ -51,7 +48,6 @@ const RegisterPage = () => {
       return;
     }
 
-
     // Create form data to send to the server
     const formData = {
       "email": email,
@@ -59,7 +55,7 @@ const RegisterPage = () => {
       'confirmPassword': ConfirmPassword,
       'name': name,
       'phone': phone,
-      'image': imgSrc
+      'image': image
     }
 
     try {
@@ -81,76 +77,64 @@ const RegisterPage = () => {
   };
 
 
-
   const handleRegisterWithGoogle = () => {
     // Implement Google registration logic here
     console.log("Registering with Google...");
   };
-  const handelUploadProfileImage = () => {
-    console.log(file)
+  const handelUploadProfileImage = (event) => {
+    event.preventDefault();
     const formData = new FormData();
-    if (file) {
-      formData.append('file', file);
-      fetch('http://localhost:8080/files',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'image/jpeg'
-
-          },
-          body: formData
-        }.then(res => {
-          console.log(res);
-          setImageSrc(res.data.url);
-        }).catch(err => {
-          console.log(err);
-        })
-       );
-    }
+    formData.append('image', image);
+    fetch('http://localhost:8080/files', {
+      method: 'POST',
+      body: formData
+    }).then((res) => res.json())
+      .then((data) => {
+        setImage(data.imageName);
+      })
+      .catch(err => {
+        console.log(err)
+      });
   };
 
-
-
-const imgSelected = (event) => {
-  setImageSrc(URL.createObjectURL(event.target.files[0]));
-  if (event.target.files && event.target.files.length > 0) {
-    setFile(event.target.files[0]);
+  const imgSelected = (event) => {
+    setImage(event.target.files[0]);
+    setImgPreview(URL.createObjectURL(event.target.files[0]));
   }
-}
 
-return (
-  <div className="register-page">
-    <div className="glass-container">
-      <h2>Register</h2>
-      <form className="register-form" onSubmit={handleRegisterWithEmail}>
-        <img src={imgSrc ? imgSrc : profile} alt='' className='profileImg' />
-        <span>Select profile image</span>
-        <IconButton
-          component="label"
-          htmlFor="file"
-          className="selectImgBtn"
-          onClick={handelUploadProfileImage}
-        >
-          <AddPhotoAlternateIcon />
-        </IconButton>
-        <input id="file" type="file" onChange={imgSelected} style={{ opacity: 0 }}></input>
-        <input className='name-input' type="text" onChange={handelChangeName} value={name} placeholder="Name" required />
-        <input className='email-register' type="email" onChange={handleChangeEmail} value={email} placeholder="Email" required />
-        <input className='tel-register' type="tel" onChange={handleChangePhone} value={phone} placeholder="Phone Number" required />
-        <input className='password-register' type="password" onChange={handleChangePassword} value={password} placeholder="Password" required />
-        <input className='confirm-register' type="password" onChange={handleChangeConfirmPassword} value={ConfirmPassword} placeholder="Confirm Password" required />
-        <button className='register-btn' type="submit">Submit</button>
-      </form>
-      <div className="or-text-register">
-        <span>or</span>
-      </div>
-      <div className="google-sign-up">
-        <span>Sign up with Google</span>
-        <IconButton sx={{ width: 'fit-content' }}><GoogleIcon /></IconButton>
+  return (
+    <div className="register-page">
+      <div className="glass-container">
+        <h2>Register</h2>
+        <form className="register-form" onSubmit={handleRegisterWithEmail}>
+          <img src={imgPreview ? imgPreview : profile} alt='' className='profileImg' />
+          <span>Select profile image</span>
+          <IconButton
+            component="label"
+            htmlFor="file"
+            className="selectImgBtn"
+            onClick={handelUploadProfileImage}
+          >
+            <AddPhotoAlternateIcon />
+          </IconButton>
+          <input id="file" type="file" accept='image/*' onChange={imgSelected} ></input>
+          <input className='name-input' type="text" onChange={handelChangeName} value={name} placeholder="Name" required />
+          <input className='email-register' type="email" onChange={handleChangeEmail} value={email} placeholder="Email" required />
+          <input className='tel-register' type="tel" onChange={handleChangePhone} value={phone} placeholder="Phone Number" required />
+          <input className='password-register' type="password" onChange={handleChangePassword} value={password} placeholder="Password" required />
+          <input className='confirm-register' type="password" onChange={handleChangeConfirmPassword} value={ConfirmPassword} placeholder="Confirm Password" required />
+          <button className='register-btn' type="submit">Submit</button>
+        </form>
+        <div className="or-text-register">
+          <span>or</span>
+        </div>
+        <div className="google-sign-up">
+          <span>Sign up with Google</span>
+          <IconButton sx={{ width: 'fit-content' }}><GoogleIcon /></IconButton>
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
 };
 
 export default RegisterPage;

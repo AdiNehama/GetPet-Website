@@ -26,8 +26,9 @@ function MyPostCard(props) {
         window.location.reload();
       });
   }
-
-  const age = new Date().getFullYear() - new Date(props.birthDate).getFullYear();
+  const dateArr = props.birthDate.split('/');
+  const date = new Date(dateArr[2], dateArr[1] - 1, dateArr[0]);
+  const age = new Date().getFullYear() - date.getFullYear();
 
   return (
     <Card className="post-Card" style={{ width: '18rem', marginTop: '20px' }}>
