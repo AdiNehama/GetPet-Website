@@ -97,8 +97,8 @@ const Profile = () => {
   }
 
   return (
-    <div className="edit-page">
-    <div className="glass-container-edit">
+    <div className="edit-profile-page">
+    <div className="glass-container-editprofile">
       <h2>Edit Your Profile</h2>
       <form className="edit-form" onSubmit={handleEditInfo}>
         <img src={image ? image : profile} alt='' className='profileImg' />
@@ -113,12 +113,12 @@ const Profile = () => {
           <AddPhotoAlternateIcon />
         </IconButton>
         <input id="file" type="file" accept='image/*' onChange={imgSelected} ></input>
-        <input className='edit-input' type="text" onChange={handleNameChange} value={name} placeholder="name" required />
-        <input className='edit-input' type="text" onChange={handleEmailChange} value={email} placeholder="email" required />
-        <input className='edit-input' type="text" onChange={handlePhoneChange} value={phone} placeholder="phone" required />
-        <input className='edit-input' type="password" onChange={handlePasswordChange} value={password} placeholder="password" required />
-        <input className='edit-input' type="password" onChange={handleConfirmedPasswordChange} value={confirmedPassword} placeholder="Confirmed Password" required />
-        <button className='submit-btn' type="submit">submit changes</button>
+        <input className='edit-input-profile' type="text" onChange={handleNameChange} value={name} placeholder="name" required />
+        <input className='edit-input-profile' type="text" onChange={handleEmailChange} value={email} placeholder="email" required />
+        <input className='edit-input-profile' type="text" onChange={handlePhoneChange} value={phone} placeholder="phone" required />
+        <input className='edit-input-profile' type="password" onChange={handlePasswordChange} value={password} placeholder="password" required />
+        <input className='edit-input-profile' type="password" onChange={handleConfirmedPasswordChange} value={confirmedPassword} placeholder="Confirmed Password" required />
+        <button className='submit-btn-profile' type="submit">submit changes</button>
       </form>
     </div>
   </div>
