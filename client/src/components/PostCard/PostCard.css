@@ -3,3 +3,7 @@
     margin-right: 1ch;
 }
 
+.header-img {
+    object-fit: cover;
+    height: 10rem;
+}

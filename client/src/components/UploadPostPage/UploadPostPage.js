@@ -12,6 +12,7 @@ function UploadPostPage() {
   const userId = localStorage.user_id;
   const navigate = useNavigate();
   const [image, setImage] = useState('');
+  const [imgPreview, setImagePreview] = useState('');
   const [kind, setKind] = useState('');
   const [birthDate, setBirthDate] = useState('');
   const [about, setAbout] = useState('');
@@ -22,7 +23,8 @@ function UploadPostPage() {
   const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
 
   const imgSelected = (event) => {
-    setImage(URL.createObjectURL(event.target.files[0]));
+    setImagePreview(URL.createObjectURL(event.target.files[0]));
+    setImage(event.target.files[0]);
   }
 
   const handleChangeKind = (event) => {
@@ -58,7 +60,7 @@ function UploadPostPage() {
       body: formData
     }).then((res) => res.json())
       .then((data) => {
-        setImage(data.path);
+        setImage(data.imageName);
       })
       .catch(err => {
         console.log(err)
@@ -108,8 +110,9 @@ function UploadPostPage() {
     <div className="upload-post-container">
       <form className="upload-form" onSubmit={handleUpload}>
         <h1 className='uploadTitle'> Upload A Pet</h1>
-        <img src={image ? image : defaultPostImage} alt='' className='postImage' />
+        <img src={imgPreview ? imgPreview : defaultPostImage} alt='' className='postImage' />
         <span>Select your dog image</span>
+        <span>first select your file then click on the icon</span>
         <IconButton
           component="label"
           htmlFor="file"
@@ -118,7 +121,7 @@ function UploadPostPage() {
         >
           <AddPhotoAlternateIcon />
         </IconButton>
-        <input id="file" type="file" onChange={imgSelected} ></input>
+        <input id="file" type="file" accept='image/*' onChange={imgSelected} ></input>
         <input className='kind-input' type="text" onChange={handleChangeKind} value={kind} placeholder="Kind" required />
         <input className='birthDate-input' type="text" onChange={handleChangeBirthDate} value={birthDate} placeholder="Birth Date DD/MM/YYYY" required />
         <input className='about-input' type="text" onChange={handleChangeAbout} value={about} placeholder="About" required />

@@ -7,15 +7,15 @@ import { IconButton } from '@mui/material';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import './EditPost.css';
 
-
-
-
 const EditPost = (props) => {
+  const serverUrl = process.env.REACT_APP_SERVER_URL;
+  const port = process.env.REACT_APP_SERVER_PORT;
   const myLocation = useLocation();
   const navigate = useNavigate();
   const path = myLocation.pathname.split('/');
   const postId = path[path.length - 1];
   const cookies = new Cookies();
+  const imageUrl= `${serverUrl}:${port}/images/${props.image}`
 
   //const use state to each filed
   const [kind, setKind] = useState();
@@ -24,7 +24,8 @@ const EditPost = (props) => {
   const [phone, setPhone] = useState();
   const [location, setLocation] = useState();
   const [ownerName, setOwnerName] = useState();
-  const [imgSrc, setImgSrc] = useState();
+  const [image, setImage] = useState();
+  const [imgPreview, setImgPreview] = useState();
 
   useEffect(() => {
     fetch(`http://localhost:8080/posts/postbyid/${postId}`, {
@@ -35,19 +36,21 @@ const EditPost = (props) => {
       }
     }).then((res) => res.json())
       .then((data) => {
-        const { ownerName, image, kind, birthDate, about, phone, location } = data.post;
+        const { ownerName, kind, birthDate, about, phone, location } = data.post;
+        const imageUrl= `${serverUrl}:${port}/images/${data.post.image}`;
         setKind(kind);
         setBirthDate(birthDate);
         setAbout(about);
         setPhone(phone);
         setLocation(location);
         setOwnerName(ownerName);
-        setImgSrc(image);
+        setImage(imageUrl);
       });
   }, []);
 
   const imgSelected = (event) => {
-    setImgSrc(URL.createObjectURL(event.target.files[0]));
+    setImgPreview(URL.createObjectURL(event.target.files[0]));
+    setImage(event.target.files[0]); 
   }
   const handleEditInfo = (event) => {
     event.preventDefault(); // Prevent default form submission
@@ -64,7 +67,7 @@ const EditPost = (props) => {
         phone,
         location,
         ownerName,
-        image: imgSrc
+        image: image
       })
     }).then((res) => res.json())
       .then(() => {
@@ -73,7 +76,20 @@ const EditPost = (props) => {
 
   };
 
-  const handelUploadPostImage = () => {
+  const handelUploadPostImage = (event) => {
+    event.preventDefault();
+    const formData = new FormData();
+    formData.append('image', image);
+    fetch('http://localhost:8080/files', {
+      method: 'POST',
+      body: formData
+    }).then((res) => res.json())
+      .then((data) => {
+        setImage(data.imageName);
+      })
+      .catch(err => {
+        console.log(err)
+      });
    
   };
   const handleKindChange = (event) => {
@@ -95,14 +111,14 @@ const EditPost = (props) => {
     setOwnerName(event.target.value);
   };
   
-
   return (
     <div className="edit-page">
-      <div className="glass-container">
+      <div className="glass-container-edit">
         <h2>Edit Your Post</h2>
         <form className="edit-form" onSubmit={handleEditInfo}>
-          <img src={imgSrc ? imgSrc : postImage} alt='' className='postImg' />
+          <img src={image ? image : postImage} alt='' className='postImg' />
           <span>edit post image</span>
+          <span>first select new image then click on the icon</span>
           <IconButton
             component="label"
             htmlFor="file"
@@ -111,16 +127,15 @@ const EditPost = (props) => {
           >
             <AddPhotoAlternateIcon />
           </IconButton>
-          <input id="file" type="file" onChange={imgSelected} style={{ opacity: 0 }}></input>
+          <input id="file" type="file" accept='image/*' onChange={imgSelected} ></input>
           <input className='edit-input' type="text" onChange={handleKindChange} value={kind} placeholder="kind" required />
           <input className='edit-input' type="text" onChange={handleBirthDateChange} value={birthDate} placeholder="birth date" required />
           <input className='edit-input' type="text" onChange={handleAboutChange} value={about} placeholder="about" required />
           <input className='edit-input' type="tel" onChange={handlePhoneChange} value={phone} placeholder="phone" required />
           <input className='edit-input' type="text" onChange={handleLocationChange} value={location} placeholder="location" required />
           <input className='edit-input' type="text" onChange={handleOwnerNameChange} value={ownerName} placeholder="ownerName" required />
-          <button className='submit-btn' type="submit">Submit Change</button>
+          <button className='submit-btn' type="submit"></button>
         </form>
-
       </div>
     </div>
   );
