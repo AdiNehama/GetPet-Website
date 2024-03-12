@@ -3,10 +3,10 @@ import Cookies from 'universal-cookie';
 import PostCard from '../PostCard/PostCard';
 import { Container, Row, Col } from 'react-bootstrap'
 
-
-
 const HomePage = () => {
     const [posts, setPosts] = useState([]);
+    const [image, setImage] = useState([]);
+    const [allImages, setAllImages] = useState([]);
 
     useEffect(() => {
         const cookies = new Cookies();
@@ -30,7 +30,7 @@ const HomePage = () => {
                         ...post,
                         goodWithChildren: response[0]?.good_with_children || 1,
                     }
-            
+
                 })
                 setPosts(await Promise.all(enrichedPosts));
             });
@@ -42,6 +42,7 @@ const HomePage = () => {
                 {posts.map((post) => (
                     <Col>
                         <PostCard key={'post' + post._id} className='post-card'
+                            image={post.image}
                             kind={post.kind}
                             birthDate={post.birthDate}
                             about={post.about}
