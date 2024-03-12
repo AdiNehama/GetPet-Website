@@ -3,6 +3,7 @@ import { useGoogleOAuth } from '@react-oauth/google';
 import GoogleIcon from '@mui/icons-material/Google';
 import { IconButton } from '@mui/material';
 import profile from '../../assets/images/user-default-96.png';
+import PublishIcon from '@mui/icons-material/Publish';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import { useNavigate } from 'react-router-dom';
 import './RegisterPage.css';
@@ -109,13 +110,14 @@ const RegisterPage = () => {
         <form className="register-form" onSubmit={handleRegisterWithEmail}>
           <img src={imgPreview ? imgPreview : profile} alt='' className='profileImg' />
           <span>Select profile image</span>
+          <span>first select image then click on the icon</span>
           <IconButton
             component="label"
             htmlFor="file"
             className="selectImgBtn"
             onClick={handelUploadProfileImage}
           >
-            <AddPhotoAlternateIcon />
+            <PublishIcon  />
           </IconButton>
           <input id="file" type="file" accept='image/*' onChange={imgSelected} ></input>
           <input className='name-input' type="text" onChange={handelChangeName} value={name} placeholder="Name" required />
