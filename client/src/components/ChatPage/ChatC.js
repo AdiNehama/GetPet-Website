@@ -39,10 +39,14 @@ function Chat({ socket, username, room }) {
 
   return (
     <div className="chat-window">
+    <div className="glass-container-my-profile">
       <div className="chat-header">
-        <p>Chat</p>
-      </div>
+      {messageList.map((messageContent) => {
+            return (
+              <p id="author">{messageContent.author}</p> 
+                );})}   </div>
       <div className="chat-body">
+      
         <ScrollToBottom className="message-container">
           {messageList.map((messageContent) => {
             return (
@@ -78,6 +82,7 @@ function Chat({ socket, username, room }) {
         />
         <button onClick={sendMessage}>&#9658;</button>
       </div>
+    </div>
     </div>
   );
 }
