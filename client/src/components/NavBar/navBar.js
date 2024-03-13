@@ -14,6 +14,8 @@ import './navBar.css';
 function NavigationBar() {
     const { pathname } = useLocation(); // Get the current location
     const [searchTerm, setSearchTerm] = useState(''); // State for the search term
+    // const [posts, setPosts] = useState([]); // State for posts
+    // const [filteredResults, setFilteredResults] = useState([]); // State for filtered results
 
     const shouldShowAboutBtn = pathname === '/';
     const shouldShowSignInBtn = pathname === '/';
@@ -22,6 +24,25 @@ function NavigationBar() {
     const shouldShowNavigationLinks = ['/home', '/profile' ,'/myposts', '/chat', '/upload'].includes(pathname) || ['/editpost'].includes(pathname.split('/').slice(0, -1).join('/'));
     const shouldShowSearchForm = ['/home', '/profile', '/myposts', '/chat', '/upload'].includes(pathname) || ['/editpost'].includes(pathname.split('/').slice(0, -1).join('/'));
     const shouldShowSystemButtons = shouldShowAboutBtn || shouldShowSignInBtn;
+
+    // useEffect(() => {
+    //     // Fetch posts from MongoDB
+    //     fetchPosts()
+    //         .then(data => {
+    //             setPosts(data); // Set posts in state
+    //         })
+    //         .catch(error => {
+    //             console.error('Error fetching posts:', error);
+    //         });
+    // }, []);
+
+    // useEffect(() => {
+    //     // Filter posts based on search term
+    //     const filtered = posts.filter(post =>
+    //         post.kind.toLowerCase().includes(searchTerm.toLowerCase())
+    //     );
+    //     setFilteredResults(filtered);
+    // }, [searchTerm, posts]);
 
     // Function to handle search term change
     const handleSearchChange = (event) => {
@@ -50,7 +71,7 @@ function NavigationBar() {
                         type="text"
                         value={searchTerm}
                         onChange={handleSearchChange}
-                        placeholder="Search"
+                        placeholder="Search by pet kind"
                     />
                     <IconButton className='search-icon' type="submit">
                     <SearchIcon />
@@ -61,7 +82,7 @@ function NavigationBar() {
                 (<div className="navigation-links-container">
                 <IconButton component={Link} to="/home" className="nav-link white"><HomeIcon /></IconButton>
                 <IconButton component={Link} to="/profile" className="nav-link white"><SentimentSatisfiedAltIcon /></IconButton>
-                <IconButton component={Link} to="/messages" className="nav-link white"><ChatIcon /></IconButton>
+                <IconButton component={Link} to="/chat" className="nav-link white"><ChatIcon /></IconButton>
                 <IconButton component={Link} to="/upload" className="nav-link white"><AddCircleOutlineIcon /></IconButton>
                 <IconButton component={Link} to="/logout" className="nav-link white"><LogoutIcon  /></IconButton>
                     {shouldShowAboutBtn && (<Link to="/about" className="button">About</Link>)}
@@ -75,6 +96,13 @@ function NavigationBar() {
                     <Link to="/signin" className="button white">Sign In</Link>
                 </ul>
             )}
+
+            {/* {filteredResults.map(post => (
+                            <div key={post._id}>
+                                <p>{post.title}</p>
+                                <p>{post.kind}</p>
+                            </div>
+                        ))} */}
         </div>
     );
 }
