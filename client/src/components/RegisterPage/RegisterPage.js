@@ -3,7 +3,7 @@ import { useGoogleOAuth } from '@react-oauth/google';
 import GoogleIcon from '@mui/icons-material/Google';
 import { IconButton } from '@mui/material';
 import profile from '../../assets/images/user-default-96.png';
-import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+import PublishIcon from '@mui/icons-material/Publish';
 import { useNavigate } from 'react-router-dom';
 import './RegisterPage.css';
 
@@ -81,6 +81,7 @@ const RegisterPage = () => {
     // Implement Google registration logic here
     console.log("Registering with Google...");
   };
+  
   const handelUploadProfileImage = (event) => {
     event.preventDefault();
     const formData = new FormData();
@@ -109,15 +110,16 @@ const RegisterPage = () => {
         <form className="register-form" onSubmit={handleRegisterWithEmail}>
           <img src={imgPreview ? imgPreview : profile} alt='' className='profileImg' />
           <span>Select profile image</span>
+          <span>first select file then click on the icon</span>
           <IconButton
             component="label"
             htmlFor="file"
             className="selectImgBtn"
             onClick={handelUploadProfileImage}
           >
-            <AddPhotoAlternateIcon />
+            <PublishIcon  />
           </IconButton>
-          <input id="file" type="file" accept='image/*' onChange={imgSelected} ></input>
+          <input id="file" className='edit-image' type="file" accept='image/*' onChange={imgSelected} ></input>
           <input className='name-input' type="text" onChange={handelChangeName} value={name} placeholder="Name" required />
           <input className='email-register' type="email" onChange={handleChangeEmail} value={email} placeholder="Email" required />
           <input className='tel-register' type="tel" onChange={handleChangePhone} value={phone} placeholder="Phone Number" required />

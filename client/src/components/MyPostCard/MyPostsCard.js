@@ -8,8 +8,11 @@ import Cookies from 'universal-cookie';
 import './MyPostsCard.css';
 
 function MyPostCard(props) {
+  const serverUrl = process.env.REACT_APP_SERVER_URL;
+  const port = process.env.REACT_APP_SERVER_PORT;
   const navigate = useNavigate();
   const cookies = new Cookies();
+  const imageUrl= `${serverUrl}:${port}/images/${props.image}`
 
   const onEditButtonClick = () => {
     navigate('/editpost/' + props.id)
@@ -32,7 +35,7 @@ function MyPostCard(props) {
 
   return (
     <Card className="post-Card" style={{ width: '18rem', marginTop: '20px' }}>
-      <Card.Img variant="top" src={props.image} />
+      <Card.Img className='my-post-card-img' variant="top" src={imageUrl} />
       <Card.Body>
         <Card.Title></Card.Title>
         <Card.Text>

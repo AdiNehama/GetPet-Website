@@ -1,6 +1,4 @@
-/* UploadPostPage.css */
-
-.upload-post-container {
+.edit-profile-page{
     position: relative;
     display: flex;
     justify-content: center;
@@ -15,12 +13,17 @@
     overflow-y: auto; /* Allow vertical scrolling */
 }
 
-.postImage {
-    width: 50%;
-    height: 50%;
+.submit-btn-profile{
+    color: white;
+    border: 1px solid white;
+    background-color: #C3B8B1;
+    margin-right: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin: 30px;
 }
 
-.upload-form {
+.glass-container-editprofile{
     display: flex;
     flex-direction: column;
     max-width: 330px;
@@ -28,37 +31,10 @@
     padding: 15px;
     padding-bottom: inherit;
     align-items: center;
-    justify-content: center;
     text-align: center;
+    margin-top: 20rem;
     margin-bottom: 1rem;
     border-radius: 15px;
-    margin-top: 20rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
     z-index: 1; /* Ensure the glass container is on top */
-  }
-  
- 
-  input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
-  
-  .uploadAPost-btn {
-    padding: 10px;
-    background-color: #C3B8B1;
-    color: white;
-    border: none;
-    cursor: pointer;
-    margin-bottom: 10px;
-  }
-  
-  .uploadAPost-btn :hover {
-    background-color: #8f7777;
-  }
-
-  .uploadTitle {
-    color: #8f7777;
-  }
+}

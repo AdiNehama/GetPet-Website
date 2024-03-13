@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./ChatPage.css";
 import io from "socket.io-client";
 import "./ChatC";
@@ -8,6 +8,13 @@ const ChatPage = () => {
   const [username, setUsername] = useState("");
   const [room, setRoom] = useState("");
   const [showChat, setShowChat] = useState(false);
+
+  // useEffect(() =>{
+  //   const socket = io.connect("http://localhost:8080");
+  //   return () => {
+  //     socket.disconnect();
+  //   };
+  // }, []);
 
   const socket = io.connect("http://localhost:8080");
 
