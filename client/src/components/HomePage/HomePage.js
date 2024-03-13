@@ -39,8 +39,8 @@ const HomePage = () => {
         <Container >
             <Row>
                 {posts.map((post) => (
-                    <Col className='post-card-container'>
-                        <PostCard key={'post' + post._id} className='post-card'
+                    <Col className='post-card-container' key={'post' + post._id}>
+                        <PostCard  className='post-card'
                             image={post.image}
                             kind={post.kind}
                             birthDate={post.birthDate}
