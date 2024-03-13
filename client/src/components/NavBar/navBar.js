@@ -9,11 +9,14 @@ import ChatIcon from '@mui/icons-material/Chat';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
 import SearchIcon from '@mui/icons-material/Search';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { useNavigate } from 'react-router-dom';
+import Cookies from 'universal-cookie';
 import './navBar.css';
 
 function NavigationBar() {
     const { pathname } = useLocation(); // Get the current location
     const [searchTerm, setSearchTerm] = useState(''); // State for the search term
+    const navigate = useNavigate(); // Get the navigate function from the useNavigate hook
 
     const shouldShowAboutBtn = pathname === '/';
     const shouldShowSignInBtn = pathname === '/';
@@ -35,6 +38,14 @@ function NavigationBar() {
         // Clear search term after submission if needed
         setSearchTerm('');
     };
+    const handleLogOut = () => {
+       window.localStorage.clear();
+       const cookies = new Cookies();
+       cookies.remove("access_token");
+       window.location.reload(); 
+       navigate('/');
+       
+    }
 
     return (
         <div className="nav-bar">
@@ -63,7 +74,7 @@ function NavigationBar() {
                 <IconButton component={Link} to="/profile" className="nav-link white"><SentimentSatisfiedAltIcon /></IconButton>
                 <IconButton component={Link} to="/chat" className="nav-link white"><ChatIcon /></IconButton>
                 <IconButton component={Link} to="/upload" className="nav-link white"><AddCircleOutlineIcon /></IconButton>
-                <IconButton component={Link} to="/logout" className="nav-link white"><LogoutIcon  /></IconButton>
+                <IconButton component={Link} onClick={handleLogOut} className="nav-link white"><LogoutIcon  /></IconButton>
                     {shouldShowAboutBtn && (<Link to="/about" className="button">About</Link>)}
                 </div>)}
             {shouldShowBackBtn && (
