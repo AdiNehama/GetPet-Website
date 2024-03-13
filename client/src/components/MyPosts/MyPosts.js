@@ -25,8 +25,8 @@ const MyPosts = () => {
         <Container >
             <Row>
                 {posts.map((post) => (
-                    <Col className='my-post-card-col'>
-                        <MyPostCard key={post._id} className='post-card'
+                    <Col className='my-post-card-col' key={post._id}>
+                        <MyPostCard className='post-card'
                             image={post.image}
                             kind={post.kind}
                             birthDate={post.birthDate}
