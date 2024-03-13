@@ -1,5 +1,6 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useState, Fragment, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route , Navigate} from 'react-router-dom';
+import Cookies from 'universal-cookie';
 import LandingPage from './components/LandingPage/LandingPage';
 import AboutPage from './components/AboutPage/AboutPage';
 import SignInPage from './components/SignInPage/SignInPage';
@@ -18,6 +19,17 @@ import GoogleAuth from './components/GoogleAuth/GoogleAuth';
 
 
 function App() {
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const cookies = new Cookies();
+    const token = cookies.get('access_token');
+
+    if (token) {
+      setIsUserLoggedIn(true);
+
+    }
+  }, []);
 
   return (
     <GoogleAuth>
@@ -25,17 +37,22 @@ function App() {
         <div className="App">
           <NavBar />
           <Routes>
-            <Route path="/" element={<LandingPage />} />
+            <Route path="/" element={<LandingPage isUserLoggedIn={isUserLoggedIn} />} />
             <Route path="/about" element={<AboutPage />} />
-            <Route path="/signin" element={<SignInPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/home" element={<HomePage />} />
-            <Route path="/myposts" element={<MyPosts />} />
-            <Route path="/upload" element={<UploadPost/>}/>
-            <Route path="/chat" element={<ChatPage />} />
-            <Route path="/editpost/:postId" element={<EditPost />} />
-            <Route path="/profile" element={<ProfilePage />} />
-            <Route path="/editprofile" element={<EditProfile />} />
+            {!isUserLoggedIn && <Fragment>
+              <Route path="/signin" element={<SignInPage setIsUserLoggedIn={setIsUserLoggedIn} />} />
+              <Route path="/register" element={<RegisterPage />} />
+            </Fragment>}
+            {isUserLoggedIn && <Fragment>
+              <Route path="/home" element={<HomePage />} />
+              <Route path="/myposts" element={<MyPosts />} />
+              <Route path="/upload" element={<UploadPost />} />
+              <Route path="/chat" element={<ChatPage />} />
+              <Route path="/editpost/:postId" element={<EditPost />} />
+              <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/editprofile" element={<EditProfile />} />
+            </Fragment>}
+            <Route path='*' element={<Navigate to="/"/>}/>
           </Routes>
         </div>
       </Router>
