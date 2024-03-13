@@ -51,6 +51,7 @@ body {
   font-size: 3rem;
   margin-bottom: 1rem;
   color: #75665d;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 .joinChatContainer input {
   width: 70%;
@@ -60,6 +61,7 @@ body {
   border-radius: 15px;
   background-color: #ffffff;
   border: 1px solid #755d5d;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .joinChatContainer button {
@@ -73,6 +75,7 @@ body {
   background: #75665d;
   color: #fff;
   cursor: pointer;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .joinChatContainer button:hover {
@@ -100,6 +103,7 @@ body {
   color: #ffffff;
   font-weight: 800;
   line-height: 45px;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .chat-window .chat-body {
@@ -116,6 +120,7 @@ body {
   overflow-y: scroll;
   overflow-x: hidden;
   color: #75665d;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .chat-window .chat-body .message-container::-webkit-scrollbar {
@@ -198,7 +203,7 @@ body {
   font-size: 1em;
   border-right: none;
   outline: none;
-  font-family: "Open Sans", sans-serif;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .chat-window .chat-footer button {
@@ -212,11 +217,12 @@ body {
   outline: none;
   font-size: 25px;
   color: #75665d;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .chat-window .chat-footer button:hover {
   color: #998c82;
-
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 .hide {
   opacity: 0 !important;
@@ -224,6 +230,7 @@ body {
 
 #root > div > div.Chat > div > h3 {
   color: #75665d;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 #root > div > div.Chat > div > div > div.chat-body > div > button {
