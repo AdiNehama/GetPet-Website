@@ -26,6 +26,7 @@ const ChatPage = () => {
   };
   return (
     <div className="Chat">
+    <div className="glass-container-chat">
       {!showChat ? (
         <div className="joinChatContainer">
           <h3>Join A Chat</h3>
@@ -43,13 +44,14 @@ const ChatPage = () => {
               setRoom(event.target.value);
             }}
           />
-          <button onClick={joinRoom}>Join A Room</button>
+          <button className = "btn-join-chat" onClick={joinRoom}>Join A Room</button>
         </div>
       )
         :
         (
           <Chat socket={socket} username={username} room={room} />
         )}</div>
+        </div>
   );
 };
 
