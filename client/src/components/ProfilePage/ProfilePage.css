@@ -1,0 +1,142 @@
+/* Profile.css */
+
+.profile-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(rgba(195, 184, 177, 0.6), rgba(195, 184, 177, 0.6)), url('../../assets/images/backroundImg.jpeg');
+    background-size: contain;
+    background-position: right top;
+    z-index: 0;
+    background-repeat: no-repeat;
+    height: 100vh; /* Set height to 100vh */
+    overflow-y: auto; /* Allow vertical scrolling */
+  }
+  
+  .glass-container-profile {
+    position: relative;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    z-index: 1;
+    text-align: center;
+    margin-top: 18rem;
+  }
+  
+  .profile-options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .profile-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: bold;
+  }
+  .edit-profile {
+    color: #fff;
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    height: 1rem;
+    width: 100%;
+  }
+  
+  .edit-profile > span {
+    line-height: 0.625rem;
+  }
+  
+  .edit-profile::after,
+  .edit-profile::before {
+    content: '';
+    flex: 1;
+    height: 1px;
+    border-bottom: 1px solid #fff;;
+  }
+  
+  
+  input,
+  button {
+    display: block;
+    margin-bottom: 10px;
+    padding: 8px;
+    border: 1px solid #75665D;
+    border-radius: 4px;
+  }
+  
+  
+  .my-posts-btn{
+    background-color: #C3B8B1;
+    color: #ffffff;
+    border: 0.2px white solid;
+    cursor: pointer;
+    margin: 10px;
+  }
+  .edit-post-btn{
+    background-color: #C3B8B1;
+    color: #ffffff;
+    border: 0.2px white solid;
+    cursor: pointer;
+    margin: 10px;
+  }
+  .edit-post-btn:hover{
+    background-color: #75665D;
+  }
+  
+  .my-posts-btn:hover {
+    background-color: #75665D;
+  }
+  
+  input[type='file'] {
+    margin-bottom: 20px;
+    color: #75665D;
+  }
+  
+  .profile-image-preview {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+  
+  input.username_profile , input.phone_profile , input.password_profile , input.confirmpassword_profile{
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  #root > div > div.my-profile-page > div > div > span{
+    color: #fff;
+  }
+  
+  .preview-img {
+    /* Ensure the preview image is displayed within a specific size */
+    max-width: 100%;
+    max-height: 200px; /* Adjust the height as needed */
+    margin-top: 10px; /* Add some spacing to prevent overlap */
+  }
+
+  #root > div > div.profile-page > div > h1{
+    margin-bottom: 20px;
+    color: #75665D;
+  }
+
+  #root > div > div.profile-page > div > div > span{
+    color: #75665D;
+  }

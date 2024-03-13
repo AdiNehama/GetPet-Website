@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Cookies from 'universal-cookie';
 import PostCard from '../PostCard/PostCard';
-import { Container, Row, Col } from 'react-bootstrap'
-
-
+import { Container, Row, Col } from 'react-bootstrap';
+import './HomePage.css';
 
 const HomePage = () => {
     const [posts, setPosts] = useState([]);
@@ -30,7 +29,7 @@ const HomePage = () => {
                         ...post,
                         goodWithChildren: response[0]?.good_with_children || 1,
                     }
-            
+
                 })
                 setPosts(await Promise.all(enrichedPosts));
             });
@@ -40,8 +39,9 @@ const HomePage = () => {
         <Container >
             <Row>
                 {posts.map((post) => (
-                    <Col>
+                    <Col className='post-card-container'>
                         <PostCard key={'post' + post._id} className='post-card'
+                            image={post.image}
                             kind={post.kind}
                             birthDate={post.birthDate}
                             about={post.about}

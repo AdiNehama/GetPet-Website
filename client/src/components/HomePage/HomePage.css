@@ -1,3 +1,4 @@
-.post-card{
-    
+.post-card-container {
+    justify-content: center;
+    display: flex;
 }
