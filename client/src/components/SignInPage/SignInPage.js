@@ -6,13 +6,16 @@ import { IconButton } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import './SignInPage.css';
+import {GoogleOAuthProvider, GoogleLogin} from '@react-oauth/google';
+import { jwtDecode } from "jwt-decode";
+
 
 const SignInPage = (props) => {
   const navigate = useNavigate();
 
-  const login = useGoogleLogin({
-    onSuccess: () => { console.log('Success') }
-  })
+  // const login = useGoogleLogin({
+  //   onSuccess: () => { console.log('Success') }
+  // })
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -76,10 +79,18 @@ const SignInPage = (props) => {
         <div className="or-text">
           <span>or</span>
         </div>
-        <div className="google-sign-in">
-          <div className="google-header"  >Sign In With Google</div>
-          <IconButton sx={{ width: 'fit-content' }} onClick={login}><GoogleIcon /></IconButton>
-        </div>
+        <GoogleOAuthProvider clientId="422894887443-746rnu7vd6ldo6kkpjmorm0tebh1rt23.apps.googleusercontent.com">
+            <GoogleLogin
+              onSuccess={(credentialResponse) => {
+                const decoded = jwtDecode(credentialResponse.credential);
+                console.log(decoded);
+                navigate("/chat");
+              }}
+              onError={() => {
+                console.log("Login Failed");
+              }}
+          />
+          </GoogleOAuthProvider>
         <p className="account-question">Don't have an account? <a className="register-link" href="/register">Register</a></p>
       </div>
     </div>

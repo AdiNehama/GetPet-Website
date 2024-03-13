@@ -77,16 +77,17 @@ const RegisterPage = () => {
   };
 
 
-  const handleRegisterWithGoogle = () => {
-    // Implement Google registration logic here
-    console.log("Registering with Google...");
-  };
-  
+  // const handleRegisterWithGoogle = () => {
+  //   // Implement Google registration logic here
+  //   console.log("Registering with Google...");
+  // };
+
   const handelUploadProfileImage = (event) => {
     event.preventDefault();
+
     const formData = new FormData();
     formData.append('image', image);
-    fetch('http://localhost:8080/files', {
+    fetch('http://localhost:8080/files/', {
       method: 'POST',
       body: formData
     }).then((res) => res.json())

@@ -15,7 +15,7 @@ import ProfilePage from './components/ProfilePage/ProfilePage'
 import EditProfile from './components/EditProfile/EditProfile';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import GoogleAuth from './components/GoogleAuth/GoogleAuth';
+
 
 
 function App() {
@@ -32,7 +32,7 @@ function App() {
   }, []);
 
   return (
-    <GoogleAuth>
+ 
       <Router>
         <div className="App">
           <NavBar />
@@ -56,7 +56,8 @@ function App() {
           </Routes>
         </div>
       </Router>
-    </GoogleAuth>
+      
+  
   );
 }
 

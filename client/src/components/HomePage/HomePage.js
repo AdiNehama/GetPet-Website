@@ -41,7 +41,9 @@ const HomePage = () => {
                 {posts.map((post) => (
                     <Col className='post-card-container'>
                         <PostCard key={'post' + post._id} className='post-card'
-                            image={post.image}
+                            image={post.image}       
+                        
+
                             kind={post.kind}
                             birthDate={post.birthDate}
                             about={post.about}
