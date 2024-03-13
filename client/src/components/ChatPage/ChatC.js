@@ -39,7 +39,6 @@ function Chat({ socket, username, room }) {
 
   return (
     <div className="chat-window">
-    <div className="glass-container-my-profile">
       <div className="chat-header">
       {messageList.map((messageContent) => {
             return (
@@ -82,7 +81,6 @@ function Chat({ socket, username, room }) {
         />
         <button onClick={sendMessage}>&#9658;</button>
       </div>
-    </div>
     </div>
   );
 }
