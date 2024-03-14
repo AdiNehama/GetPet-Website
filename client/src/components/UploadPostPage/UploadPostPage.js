@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { IconButton } from '@mui/material';
 import Cookies from 'universal-cookie';
 import defaultPostImage from '../../assets/images/dog-shadow.jpg'
+import { fetcher } from '../../services/fetcher'
+import {  toast } from 'react-toastify';
 import './UploadPostPage.css';
 
 function UploadPostPage() {
@@ -50,32 +52,37 @@ function UploadPostPage() {
   const handleChangeLocation = (event) => {
     setLocation(event.target.value);
   }
-
   const handleUploadPostImage = (event) => {
     event.preventDefault();
     const formData = new FormData();
     formData.append('image', image);
-    fetch('http://localhost:8080/files', {
+    fetcher(`${process.env.REACT_APP_SERVER_URL}:${process.env.REACT_APP_SERVER_PORT}/files`, {
       method: 'POST',
       body: formData
     }).then((res) => res.json())
       .then((data) => {
         setImage(data.imageName);
+        toast("Uploaded image successfully")
       })
       .catch(err => {
-        console.log(err)
+        console.log(err);
+        toast("filed to upload image")
       });
   }
 
   const handleUpload = async (event) => {
+    const cookies = new Cookies();
     event.preventDefault();
     if (phone.length !== 10) {
+      toast("Please enter a valid phone number")
       return;
     }
     if (!image || !kind || !birthDate || !about || !phone || !ownerName || !location) {
+      toast("Please enter all the fileds")
       return;
     }
     if (!dateRegex.test(birthDate)) {
+      toast("Please enter a valid date DD/MM/YYYY format")
       return;
     }
     const postData = {
@@ -90,7 +97,7 @@ function UploadPostPage() {
     }
     console.log(postData);
     try {
-      const response = await fetch('http://localhost:8080/posts', {
+      const response = await fetcher(`${process.env.REACT_APP_SERVER_URL}:${process.env.REACT_APP_SERVER_PORT}/posts`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -102,7 +109,7 @@ function UploadPostPage() {
         navigate("/myposts")
       }
     } catch (error) {
-
+      toast("Failed to upload post, please try again later.")
     }
   }
 

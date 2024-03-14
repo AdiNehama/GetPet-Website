@@ -5,6 +5,8 @@ import { useLocation } from 'react-router-dom';
 import postImage from '../../assets/images/default-post.jpeg'
 import { IconButton } from '@mui/material';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+import { fetcher } from '../../services/fetcher'
+import { toast } from 'react-toastify';
 import './EditPost.css';
 
 const EditPost = (props) => {
@@ -27,7 +29,8 @@ const EditPost = (props) => {
   const [imgPreview, setImgPreview] = useState();
 
   useEffect(() => {
-    fetch(`http://localhost:8080/posts/postbyid/${postId}`, {
+    const cookies = new Cookies();
+    fetcher(`${process.env.REACT_APP_SERVER_URL}:${process.env.REACT_APP_SERVER_PORT}/posts/postbyid/${postId}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -44,6 +47,9 @@ const EditPost = (props) => {
         setLocation(location);
         setOwnerName(ownerName);
         setImage(imageUrl);
+        setImgPreview(imageUrl);
+      }).catch((err) =>{
+        toast("failed to retrieve post data")
       });
   }, []);
 
@@ -52,8 +58,9 @@ const EditPost = (props) => {
     setImage(event.target.files[0]);
   }
   const handleEditInfo = (event) => {
+    const cookies = new Cookies();
     event.preventDefault(); // Prevent default form submission
-    fetch(`http://localhost:8080/posts/${postId}`, {
+    fetcher(`${process.env.REACT_APP_SERVER_URL}:${process.env.REACT_APP_SERVER_PORT}/posts/${postId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -72,16 +79,15 @@ const EditPost = (props) => {
       .then(() => {
         navigate('/myposts')
       }).catch((err) => {
-
+        toast("failed to update post")
       });
-
   };
 
   const handelUploadPostImage = (event) => {
     event.preventDefault();
     const formData = new FormData();
     formData.append('image', image);
-    fetch('http://localhost:8080/files', {
+    fetch(`${process.env.REACT_APP_SERVER_URL}:${process.env.REACT_APP_SERVER_PORT}/files`, {
       method: 'POST',
       body: formData
     }).then((res) => res.json())
