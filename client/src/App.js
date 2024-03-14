@@ -1,5 +1,5 @@
 import React, { useState, Fragment, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route , Navigate} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import LandingPage from './components/LandingPage/LandingPage';
 import AboutPage from './components/AboutPage/AboutPage';
@@ -15,26 +15,13 @@ import ProfilePage from './components/ProfilePage/ProfilePage'
 import EditProfile from './components/EditProfile/EditProfile';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
-
-  useEffect(() => {  
-    const cookies = new Cookies();
-    const token = cookies.get('access_token');
-
-    if (token) {
-      setIsUserLoggedIn(true);
-
-    }
-  }, []);
-
-
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(!!(new Cookies().get('access_token')));
 
   return (
- 
       <Router>
         <div className="App">
           <NavBar />
@@ -54,12 +41,11 @@ function App() {
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="/editprofile" element={<EditProfile />} />
             </Fragment>}
-            <Route path='*' element={<Navigate to="/"/>}/>
+            <Route path='*' element={<Navigate to="/" />} />
           </Routes>
+          <ToastContainer/>
         </div>
       </Router>
-      
-  
   );
 }
 

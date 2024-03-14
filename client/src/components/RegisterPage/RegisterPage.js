@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
-import { useGoogleOAuth } from '@react-oauth/google';
+// import { useGoogleOAuth } from '@react-oauth/google';
 import GoogleIcon from '@mui/icons-material/Google';
 import { IconButton } from '@mui/material';
 import profile from '../../assets/images/user-default-96.png';
 import PublishIcon from '@mui/icons-material/Publish';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import './RegisterPage.css';
 
 const RegisterPage = () => {
   const navigate = useNavigate();
   const [imgPreview, setImgPreview] = useState('');
-  const { signup } = useGoogleOAuth();
+  // const { signup } = useGoogleOAuth();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -33,18 +34,23 @@ const RegisterPage = () => {
     event.preventDefault();
     // Form validation
     if (!name || !email || !password || !phone || !ConfirmPassword || !image) {
+      toast("please fill all the fields")
       return;
     }
     if (password !== ConfirmPassword) {
+      toast("passwords don't match")
       return;
     }
     if (phone.length !== 10) {
+      toast("please enter a valid phone number")
       return;
     }
     if (password.length < 6) {
+      toast("password must be at least 6 characters")
       return;
     }
     if (!isValidEmail(email)) {
+      toast("please enter a valid email")
       return;
     }
 
@@ -59,7 +65,7 @@ const RegisterPage = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:8080/users/register', {
+      const response = await fetch(`${process.env.REACT_APP_SERVER_URL}:${process.env.REACT_APP_SERVER_PORT}/users/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -73,6 +79,7 @@ const RegisterPage = () => {
       }
     } catch (error) {
       console.error(error);
+      toast("Failed to register, please try again later.")
     }
   };
 
@@ -84,18 +91,19 @@ const RegisterPage = () => {
 
   const handelUploadProfileImage = (event) => {
     event.preventDefault();
-
     const formData = new FormData();
     formData.append('image', image);
-    fetch('http://localhost:8080/files/', {
+    fetch(`${process.env.REACT_APP_SERVER_URL}:${process.env.REACT_APP_SERVER_PORT}/files`, {
       method: 'POST',
       body: formData
     }).then((res) => res.json())
       .then((data) => {
         setImage(data.imageName);
+        toast("image uploaded successfully")
       })
       .catch(err => {
-        console.log(err)
+        console.log(err);
+        toast("failed to upload image")
       });
   };
 
@@ -118,7 +126,7 @@ const RegisterPage = () => {
             className="selectImgBtn"
             onClick={handelUploadProfileImage}
           >
-            <PublishIcon  />
+            <PublishIcon />
           </IconButton>
           <input id="file" className='edit-image' type="file" accept='image/*' onChange={imgSelected} ></input>
           <input className='name-input' type="text" onChange={handelChangeName} value={name} placeholder="Name" required />

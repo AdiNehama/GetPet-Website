@@ -48,17 +48,6 @@ app.use(function (req, res, next) {
   next(createError(404));
 });
 
-
-
-// app.get(
-//   "/protected",
-//   jwt({ secret: "422894887443-746rnu7vd6ldo6kkpjmorm0tebh1rt23.apps.googleusercontent.com", algorithms: ["HS256"] }),
-//   function (req, res) {
-//     if (!req.auth.admin) return res.sendStatus(401);
-//     res.sendStatus(200);
-//   }
-// );
-// error handler
 app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
@@ -69,8 +58,36 @@ app.use(function (err, req, res, next) {
   res.render("error");
 });
 //port 8080
-app.listen(8080, function () {
-  console.log('Server is running on port 8080');
+
+const server = app.listen(port, () => console.log(`Server running on port ${port}.`));
+
+const io = require("socket.io")(server, {
+  // Configure CORS for socket.io
+  cors: {
+    origin: "http://localhost:3001", // Allow requests from the client's origin
+    methods: ["GET", "POST"], // Allow specified methods
+    allowedHeaders: ["my-custom-header"], // Allow specified headers
+    credentials: true // Include cookies in CORS requests
+  }
 });
+
+
+io.on("connection", async (socket) => {
+  console.log(`User Connected: ${socket.id}`);
+
+  socket.on("join_room", (data) => {
+    socket.join(data);
+    console.log(`User with ID: ${socket.id} joined room: ${data}`);
+  });
+
+  socket.on("send_message", (data) => {
+    socket.to(data.room).emit("receive_message", data);
+  });
+
+  socket.on("disconnect", () => {
+    console.log("User Disconnected", socket.id);
+  });
+});
+
 
 module.exports = app;

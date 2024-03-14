@@ -4,6 +4,9 @@ import io from "socket.io-client";
 import "./ChatC";
 import Chat from "./ChatC";
 
+
+const socket = io.connect("http://localhost:8080");
+
 const ChatPage = () => {
   const [username, setUsername] = useState("");
   const [room, setRoom] = useState("");
@@ -16,7 +19,6 @@ const ChatPage = () => {
   //   };
   // }, []);
 
-  const socket = io.connect("http://localhost:8080");
 
   const joinRoom = () => {
     if (username !== "" && room !== "") {
