@@ -24,11 +24,11 @@
   overflow-y: auto; /* Allow vertical scrolling */
 }
 
-.glass-container-my-profile {
+.glass-container-chat {
   position: relative;
   background: rgba(255, 255, 255, 0.3);
   border-radius: 15px;
-  padding: 30px;
+  padding: 45px;
   text-align: center;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
   z-index: 1;
@@ -48,21 +48,25 @@ body {
 }
 
 .joinChatContainer h3 {
-  font-size: 2.5rem;
+  font-size: 3rem;
   margin-bottom: 1rem;
+  color: #75665d;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 .joinChatContainer input {
-  width: 100%;
+  width: 70%;
+  align-self: center;
   padding: 10px;
-  margin: 5px 0;
-  border-radius: 5px;
+  margin: 10px 0;
+  border-radius: 15px;
   background-color: #ffffff;
-  border: 1px solid #755d5f;
+  border: 1px solid #755d5d;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .joinChatContainer button {
-  width: 225px;
-  height: 50px;
+  width: 400px;
+  height: 300px;
   margin: 7px;
   border: none;
   border-radius: 5px;
@@ -71,6 +75,7 @@ body {
   background: #75665d;
   color: #fff;
   cursor: pointer;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .joinChatContainer button:hover {
@@ -78,7 +83,7 @@ body {
 }
 
 .chat-window {
-  width: 300px;
+  width: 350px;
   height: 420px;
 }
 
@@ -94,10 +99,11 @@ body {
 }
 .chat-window .chat-header p {
   display: block;
-  padding: 0 1em 0 2em;
+  padding: 0 1em 0 1em;
   color: #ffffff;
-  font-weight: 700;
+  font-weight: 800;
   line-height: 45px;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .chat-window .chat-body {
@@ -105,18 +111,22 @@ body {
   border: none;
   background: #c3b8b1;
   position: relative;
+  border-radius: 6px;
 }
+
 .chat-window .chat-body .message-container {
   width: 100%;
   height: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
   color: #75665d;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .chat-window .chat-body .message-container::-webkit-scrollbar {
-  display: none;
+  display:none;
 }
+
 .chat-window .chat-body .message {
   height: auto;
   padding: 10px;
@@ -179,7 +189,7 @@ body {
 }
 
 .chat-window .chat-footer {
-  height: 40px;
+  height: 50px;
   border: none;
   border-top: none;
   display: flex;
@@ -187,14 +197,13 @@ body {
 
 .chat-window .chat-footer input {
   height: 100%;
-  flex: 85%;
+  flex: 200%;
   border: 0;
   padding: 0 0.7em;
   font-size: 1em;
   border-right: none;
-
   outline: none;
-  font-family: "Open Sans", sans-serif;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .chat-window .chat-footer button {
@@ -202,16 +211,18 @@ body {
   display: grid;
   place-items: center;
   cursor: pointer;
-  flex: 15%;
+  flex: 10%;
   height: 100%;
   background: transparent;
   outline: none;
   font-size: 25px;
   color: #75665d;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .chat-window .chat-footer button:hover {
   color: #998c82;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 .hide {
   opacity: 0 !important;
@@ -219,8 +230,16 @@ body {
 
 #root > div > div.Chat > div > h3 {
   color: #75665d;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 #root > div > div.Chat > div > div > div.chat-body > div > button {
   background-color: #75665d;
+}
+
+.btn-join-chat{
+  height: 45px !important;
+  width: 110px !important;
+  align-self: center;
+  border-radius: 15px !important;
 }

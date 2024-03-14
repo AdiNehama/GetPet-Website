@@ -16,8 +16,6 @@ import './navBar.css';
 function NavigationBar() {
     const { pathname } = useLocation(); // Get the current location
     const [searchTerm, setSearchTerm] = useState(''); // State for the search term
-    // const [posts, setPosts] = useState([]); // State for posts
-    // const [filteredResults, setFilteredResults] = useState([]); // State for filtered results
     const navigate = useNavigate(); // Get the navigate function from the useNavigate hook
 
     const shouldShowAboutBtn = pathname === '/';
@@ -25,40 +23,9 @@ function NavigationBar() {
     const shouldShowLogo = ['/home','/editprofile','/profile','/myposts', '/chat', '/upload','/signin', '/register'].includes(pathname) || ['/editpost'].includes(pathname.split('/').slice(0, -1).join('/'));
     const shouldShowBackBtn = ['/about', '/signin', '/register'].includes(pathname);
     const shouldShowNavigationLinks = ['/home','/editprofile', '/profile' ,'/myposts', '/chat', '/upload'].includes(pathname) || ['/editpost'].includes(pathname.split('/').slice(0, -1).join('/'));
-    const shouldShowSearchForm = ['/home', '/editprofile' , '/profile', '/myposts', '/chat', '/upload'].includes(pathname) || ['/editpost'].includes(pathname.split('/').slice(0, -1).join('/'));
     const shouldShowSystemButtons = shouldShowAboutBtn || shouldShowSignInBtn;
 
-    // useEffect(() => {
-    //     // Fetch posts from MongoDB
-    //     fetchPosts()
-    //         .then(data => {
-    //             setPosts(data); // Set posts in state
-    //         })
-    //         .catch(error => {
-    //             console.error('Error fetching posts:', error);
-    //         });
-    // }, []);
 
-    // useEffect(() => {
-    //     // Filter posts based on search term
-    //     const filtered = posts.filter(post =>
-    //         post.kind.toLowerCase().includes(searchTerm.toLowerCase())
-    //     );
-    //     setFilteredResults(filtered);
-    // }, [searchTerm, posts]);
-
-    // Function to handle search term change
-    const handleSearchChange = (event) => {
-        setSearchTerm(event.target.value);
-    };
-
-    // Function to handle search form submission
-    const handleSearchSubmit = (event) => {
-        event.preventDefault();
-        // TODO: Add search functionality here
-        // Clear search term after submission if needed
-        setSearchTerm('');
-    };
     const handleLogOut = () => {
        window.localStorage.clear();
        const cookies = new Cookies();
@@ -76,19 +43,7 @@ function NavigationBar() {
                     <h1 className="header-text">Get Pet</h1>
                 </div>
             )}
-            {shouldShowSearchForm && (
-                <form className='search-form' onSubmit={handleSearchSubmit}>
-                    <input
-                        type="text"
-                        value={searchTerm}
-                        onChange={handleSearchChange}
-                        placeholder="Search by pet kind"
-                    />
-                    <IconButton className='search-icon' type="submit">
-                    <SearchIcon />
-                    </IconButton>
-                </form>
-            )}
+            
             {shouldShowNavigationLinks &&
                 (<div className="navigation-links-container">
                 <IconButton component={Link} to="/home" className="nav-link white"><HomeIcon /></IconButton>
@@ -107,13 +62,6 @@ function NavigationBar() {
                     <Link to="/signin" className="button white">Sign In</Link>
                 </ul>
             )}
-
-            {/* {filteredResults.map(post => (
-                            <div key={post._id}>
-                                <p>{post.title}</p>
-                                <p>{post.kind}</p>
-                            </div>
-                        ))} */}
         </div>
     );
 }
