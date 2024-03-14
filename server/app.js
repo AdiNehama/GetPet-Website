@@ -65,7 +65,7 @@ if (isRailway) {
   const railwayPort = process.env.PORT;
 
   app.listen(railwayPort, "0.0.0.0", function () {
-    console.log('Server is running on port ' + port);
+    console.log('Server is running on port ' + railwayPort);
   });
 } else {
   app.listen(port, function () {
