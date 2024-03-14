@@ -6,6 +6,7 @@ var allUsers = require('../controllers/users/allUsersContoller');
 const getUserById = require('../controllers/users/getUserByIdController');
 const updateUser = require('../controllers/users/updateUserController');
 const refreshToken = require('../controllers/users/refreshTokensController');
+const googlelogin =require('../controllers/users/googleLoginController')
 
 
 var router = express.Router();
@@ -23,8 +24,7 @@ router.get('/:userId',authenticate, getUserById.getOneUserById);
 //edit user information
 router.put('/:userId',authenticate, updateUser.UpdateUser);
 
-
-
+// router.post('/googlelogin',googlelogin.googleSignIn );
 
 
 

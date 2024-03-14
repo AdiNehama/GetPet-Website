@@ -21,7 +21,7 @@ import './App.css';
 function App() {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
 
-  useEffect(() => {
+  useEffect(() => {  
     const cookies = new Cookies();
     const token = cookies.get('access_token');
 
@@ -30,6 +30,8 @@ function App() {
 
     }
   }, []);
+
+
 
   return (
  

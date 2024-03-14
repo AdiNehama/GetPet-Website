@@ -6,6 +6,7 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var bodyParser = require("body-parser");
 const cors = require("cors");
+var { expressjwt: jwt } = require("express-jwt");
 
 //port
 const port = 8080;
@@ -47,6 +48,16 @@ app.use(function (req, res, next) {
   next(createError(404));
 });
 
+
+
+// app.get(
+//   "/protected",
+//   jwt({ secret: "422894887443-746rnu7vd6ldo6kkpjmorm0tebh1rt23.apps.googleusercontent.com", algorithms: ["HS256"] }),
+//   function (req, res) {
+//     if (!req.auth.admin) return res.sendStatus(401);
+//     res.sendStatus(200);
+//   }
+// );
 // error handler
 app.use(function (err, req, res, next) {
   // set locals, only providing error in development

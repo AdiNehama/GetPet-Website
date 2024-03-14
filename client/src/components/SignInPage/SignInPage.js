@@ -13,12 +13,38 @@ import { jwtDecode } from "jwt-decode";
 const SignInPage = (props) => {
   const navigate = useNavigate();
 
-  // const login = useGoogleLogin({
-  //   onSuccess: () => { console.log('Success') }
-  // })
+  // const handleSignInWithGoogle = async (credentialResponse) => {
+  //   try {
+  //     const decoded = jwtDecode(credentialResponse.credential);
+  //     const userId = decoded.sub;
+  //     const accessToken = credentialResponse.accessToken;
+  //     const refreshToken = credentialResponse.refreshToken;
+
+  //     // Save access token in cookies
+  //     const cookies = new Cookies();
+  //     cookies.set('access_token', accessToken);
+
+  //     // Save refresh token and user ID in local storage
+  //     localStorage.setItem('refresh_token', refreshToken);
+  //     localStorage.setItem('user_id', userId);
+
+  //     // Update state to indicate user is logged in
+  //     props.setIsUserLoggedIn(true);
+
+  //     // Navigate to home page
+  //     navigate('/home');
+  //   } catch (error) {
+  //     console.error('Google sign-in error:', error);
+  //   }
+  // }
+
+  
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+
+
+  
 
   const handleChangeEmail = (event) => {
     setEmail(event.target.value);
@@ -39,7 +65,7 @@ const SignInPage = (props) => {
         'email': email,
         'password': password
       }
-      const loginResponse = await fetch('http://localhost:8080/users/login', {
+      const loginResponse = await fetch('http://localhost:8080/users/login',{
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -62,10 +88,6 @@ const SignInPage = (props) => {
   };
 
 
-  // const handleSignInWithGoogle = () => {
-  //   // Implement Google sign-in logic here
-  //   console.log("Signing in with Google...");
-  // };
 
   return (
     <div className="sign-in-page">
@@ -84,7 +106,7 @@ const SignInPage = (props) => {
               onSuccess={(credentialResponse) => {
                 const decoded = jwtDecode(credentialResponse.credential);
                 console.log(decoded);
-                navigate("/chat");
+                navigate("/home");
               }}
               onError={() => {
                 console.log("Login Failed");

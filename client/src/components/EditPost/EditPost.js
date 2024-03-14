@@ -17,12 +17,12 @@ const EditPost = (props) => {
   const cookies = new Cookies();
 
   //const use state to each filed
-  const [kind, setKind] = useState();
-  const [birthDate, setBirthDate] = useState();
-  const [about, setAbout] = useState();
-  const [phone, setPhone] = useState();
-  const [location, setLocation] = useState();
-  const [ownerName, setOwnerName] = useState();
+  const [kind, setKind] = useState('');
+  const [birthDate, setBirthDate] = useState('');
+  const [about, setAbout] = useState('');
+  const [phone, setPhone] = useState('');
+  const [location, setLocation] = useState('');
+  const [ownerName, setOwnerName] = useState('');
   const [image, setImage] = useState();
   const [imgPreview, setImgPreview] = useState();
 
@@ -36,7 +36,7 @@ const EditPost = (props) => {
     }).then((res) => res.json())
       .then((data) => {
         const { ownerName, kind, birthDate, about, phone, location } = data.post;
-        const imageUrl= `${serverUrl}:${port}/images/${data.post.image}`;
+        const imageUrl = `${serverUrl}:${port}/images/${data.post.image}`;
         setKind(kind);
         setBirthDate(birthDate);
         setAbout(about);
@@ -49,7 +49,7 @@ const EditPost = (props) => {
 
   const imgSelected = (event) => {
     setImgPreview(URL.createObjectURL(event.target.files[0]));
-    setImage(event.target.files[0]); 
+    setImage(event.target.files[0]);
   }
   const handleEditInfo = (event) => {
     event.preventDefault(); // Prevent default form submission
@@ -87,11 +87,13 @@ const EditPost = (props) => {
     }).then((res) => res.json())
       .then((data) => {
         setImage(data.imageName);
+        const imageUrl = `${serverUrl}:${port}/images/${data.imageName}`;
+        setImgPreview(imageUrl);
       })
       .catch(err => {
         console.log(err)
       });
-   
+
   };
   const handleKindChange = (event) => {
     setKind(event.target.value);
@@ -111,13 +113,13 @@ const EditPost = (props) => {
   const handleOwnerNameChange = (event) => {
     setOwnerName(event.target.value);
   };
-  
+
   return (
     <div className="edit-page">
       <div className="glass-container-edit">
         <h2>Edit Your Post</h2>
         <form className="edit-form" onSubmit={handleEditInfo}>
-          <img src={image ? image : postImage} alt='' className='postImg' />
+          <img src={imgPreview} alt='' className='postImg' />
           <span>edit post image</span>
           <span>first select new image then click on the icon</span>
           <IconButton
@@ -135,7 +137,7 @@ const EditPost = (props) => {
           <input className='edit-input' type="tel" onChange={handlePhoneChange} value={phone} placeholder="phone" required />
           <input className='edit-input' type="text" onChange={handleLocationChange} value={location} placeholder="location" required />
           <input className='edit-input' type="text" onChange={handleOwnerNameChange} value={ownerName} placeholder="ownerName" required />
-          <button className='submit-btn' type="submit"></button>
+          <button className='submit-btn-edit-post' type="submit">submit changes</button>
         </form>
       </div>
     </div>
