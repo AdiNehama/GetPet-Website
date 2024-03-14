@@ -62,7 +62,9 @@ const port = isHttps ? httpsPort : httpPort;
 const isRailway = process.env.IS_RAILWAY === "true";
 
 if (isRailway) {
-  app.listen(port, "0.0.0.0", function () {
+  const railwayPort = process.env.PORT;
+
+  app.listen(railwayPort, "0.0.0.0", function () {
     console.log('Server is running on port ' + port);
   });
 } else {
