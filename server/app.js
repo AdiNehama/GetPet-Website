@@ -7,9 +7,6 @@ var logger = require("morgan");
 var bodyParser = require("body-parser");
 const cors = require("cors");
 
-//port
-const port = 8080;
-
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var postsRouter = require("./routes/posts");
@@ -57,9 +54,14 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render("error");
 });
-//port 8080
-app.listen(8080, function () {
-  console.log('Server is running on port 8080');
+
+const isHttps = process.env.IS_HTTPS === "true";
+const httpsPort = process.env.HTTPS_PORT;
+const httpPort = process.env.HTTP_PORT;
+const port = isHttps ? httpsPort : httpPort;
+
+app.listen(port, function () {
+  console.log('Server is running on port ' + port);
 });
 
 module.exports = app;
