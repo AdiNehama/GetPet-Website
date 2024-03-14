@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Cookies from 'universal-cookie';
 import MyPostCard from '../MyPostCard/MyPostsCard';
 import { Container, Row, Col } from 'react-bootstrap'
+import { fetcher } from '../../services/fetcher'
+import { toast } from 'react-toastify';
 
 const MyPosts = () => {
     const [posts, setPosts] = useState([]);
@@ -9,7 +11,7 @@ const MyPosts = () => {
 
     useEffect(() => {
         const cookies = new Cookies();
-        fetch(`http://localhost:8080/posts/${uid}`, {
+        fetcher(`${process.env.REACT_APP_SERVER_URL}:${process.env.REACT_APP_SERVER_PORT}/posts/${uid}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -18,6 +20,8 @@ const MyPosts = () => {
         }).then((res) => res.json())
             .then((data) => {
                 setPosts(data);
+            }).catch((err) => {
+                toast("failed to retrieve users posts");
             });
     }, []);
 

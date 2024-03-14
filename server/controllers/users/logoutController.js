@@ -1,7 +1,7 @@
 const UserSchema = require('../../models/UserSchema');
 const jwt = require('jsonwebtoken');
 
-exports.refreshToken = async (req, res) => {
+exports.logout = async (req, res, next) => {
     const authHeaders = req.headers['authorization'];
     const token = authHeaders && authHeaders.split(' ')[1];
     if (token == null) return res.status(401);
@@ -16,24 +16,13 @@ exports.refreshToken = async (req, res) => {
                 user.save();
                 return res.status(403).send('invalid request');
             }
-            //generate tokens
-            const accessToken = jwt.sign(
-                { userId },
-                process.env.SECRET_KEY_JWT,
-                { expiresIn: '1h' }
-            );
-            const refreshToken = jwt.sign(
-                { userId },
-                process.env.REFRESH_TOKEN
-            );
-            user.tokens[user.tokens.indexOf(token)] = refreshToken
+            user.tokens.splice(user.tokens.indexOf(token),1);
             user.markModified('tokens');
             await user.save();
-            res.status(200).json({ accessToken, refreshToken, userId });
+            res.status(200).send("success");
         } catch (error) {
             console.error(error.message);
             res.status(500).json({ error: 'Internal server error' });
         }
     })
-};
-
+}

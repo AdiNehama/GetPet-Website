@@ -2,14 +2,17 @@ import React, { useEffect, useState } from 'react';
 import Cookies from 'universal-cookie';
 import PostCard from '../PostCard/PostCard';
 import { Container, Row, Col } from 'react-bootstrap';
+import { fetcher } from '../../services/fetcher';
+import { toast } from 'react-toastify';
 import './HomePage.css';
 
 const HomePage = () => {
     const [posts, setPosts] = useState([]);
 
+
     useEffect(() => {
         const cookies = new Cookies();
-        fetch('http://localhost:8080/posts', {
+        fetcher(`${process.env.REACT_APP_SERVER_URL}:${process.env.REACT_APP_SERVER_PORT}/posts`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -32,6 +35,8 @@ const HomePage = () => {
 
                 })
                 setPosts(await Promise.all(enrichedPosts));
+            }).catch((err) => {
+                toast("failed to retrieve posts");
             });
     }, []);
 
@@ -40,7 +45,7 @@ const HomePage = () => {
             <Row>
                 {posts.map((post) => (
                     <Col className='post-card-container' key={'post' + post._id}>
-                        <PostCard  className='post-card'
+                        <PostCard className='post-card'
                             image={post.image}
                             kind={post.kind}
                             birthDate={post.birthDate}
