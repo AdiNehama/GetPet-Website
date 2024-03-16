@@ -19,14 +19,13 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
-    image:{
+    image: {
         type: String,
         required: true
     },
     tokens: {
         type: [String]
     }
-    
 });
 
 module.exports = mongoose.model('User', UserSchema);

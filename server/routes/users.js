@@ -7,6 +7,7 @@ const getUserById = require('../controllers/users/getUserByIdController');
 const updateUser = require('../controllers/users/updateUserController');
 const refreshToken = require('../controllers/users/refreshTokensController');
 const logout = require('../controllers/users/logoutController');
+const google = require('../controllers/users/googleSignInController');
 
 
 var router = express.Router();
@@ -25,6 +26,10 @@ router.get('/:userId',authenticate, getUserById.getOneUserById);
 router.put('/:userId',authenticate, updateUser.UpdateUser);
 //logout
 router.post('/logout', logout.logout);
+//google sign in
+router.post('/googleSignIn', google.GoogleSignIn);
+
+
 
 
 
