@@ -9,6 +9,9 @@ import { toast } from 'react-toastify';
 import './RegisterPage.css';
 
 const RegisterPage = () => {
+  const serverUrl = process.env.REACT_APP_SERVER_URL;
+  const port = process.env.REACT_APP_SERVER_PORT;
+
   const navigate = useNavigate();
   const [imgPreview, setImgPreview] = useState('');
   const { signup } = useGoogleOAuth();
@@ -65,7 +68,7 @@ const RegisterPage = () => {
     }
 
     try {
-      const response = await fetch(`${process.env.REACT_APP_SERVER_URL}:${process.env.REACT_APP_SERVER_PORT}/users/register`, {
+      const response = await fetch(`${serverUrl}:${port}/users/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -93,7 +96,7 @@ const RegisterPage = () => {
     event.preventDefault();
     const formData = new FormData();
     formData.append('image', image);
-    fetch(`${process.env.REACT_APP_SERVER_URL}:${process.env.REACT_APP_SERVER_PORT}/files`, {
+    fetch(`${serverUrl}:${port}/files`, {
       method: 'POST',
       body: formData
     }).then((res) => res.json())
