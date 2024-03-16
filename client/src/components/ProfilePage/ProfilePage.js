@@ -5,6 +5,7 @@ import profile from '../../assets/images/user-default-96.png';
 import { IconButton } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ const Profile = () => {
   const [phone, setPhone] = useState('');
 
   useEffect(() => {
-    fetch(`http://localhost:8080/users/${userId}`, {
+    fetch(`${serverUrl}:${port}/users/${userId}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -32,6 +33,8 @@ const Profile = () => {
         setPhone(phone);
         const imageUrl = `${serverUrl}:${port}/images/${data.image}`;
         setImage(imageUrl);
+      }).catch((err) => {
+        toast("failed to retrieve user data")
       });
   }, []);
 

@@ -5,20 +5,26 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
+import { fetcher } from '../../services/fetcher';
+import { toast } from 'react-toastify';
 import './MyPostsCard.css';
 
 function MyPostCard(props) {
   const serverUrl = process.env.REACT_APP_SERVER_URL;
   const port = process.env.REACT_APP_SERVER_PORT;
   const navigate = useNavigate();
-  const cookies = new Cookies();
-  const imageUrl= `${serverUrl}:${port}/images/${props.image}`
+  const imageUrl = `${serverUrl}:${port}/images/${props.image}`
 
   const onEditButtonClick = () => {
     navigate('/editpost/' + props.id)
   }
   const onButtonDeleteChange = () => {
-    fetch(`http://localhost:8080/posts/${props.id}`, {
+    const cookies = new Cookies();
+    if (cookies.get('access_token') === undefined) {
+      const refresh = localStorage.getItem('refresh_token');
+      cookies.set('access_token', refresh.toString());
+    }
+    fetcher(`${process.env.REACT_APP_SERVER_URL}:${process.env.REACT_APP_SERVER_PORT}/posts/${props.id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application',
@@ -26,7 +32,10 @@ function MyPostCard(props) {
       }
     }).then((res) => res.json())
       .then(() => {
+        toast('post deleted successfully');
         window.location.reload();
+      }).catch((err) => {
+        toast("failed to delete post");
       });
   }
   const dateArr = props.birthDate.split('/');
@@ -38,7 +47,7 @@ function MyPostCard(props) {
       <Card.Img className='my-post-card-img' variant="top" src={imageUrl} />
       <Card.Body>
         <Card.Title></Card.Title>
-        <Card.Text>
+        <Card.Text as="div">
           <div className="post_info">
             <span>
               Kind:

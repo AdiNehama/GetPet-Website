@@ -5,6 +5,8 @@ import { useLocation } from 'react-router-dom';
 import postImage from '../../assets/images/default-post.jpeg'
 import { IconButton } from '@mui/material';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+import { fetcher } from '../../services/fetcher'
+import { toast } from 'react-toastify';
 import './EditPost.css';
 
 const EditPost = (props) => {
@@ -17,17 +19,18 @@ const EditPost = (props) => {
   const cookies = new Cookies();
 
   //const use state to each filed
-  const [kind, setKind] = useState();
-  const [birthDate, setBirthDate] = useState();
-  const [about, setAbout] = useState();
-  const [phone, setPhone] = useState();
-  const [location, setLocation] = useState();
-  const [ownerName, setOwnerName] = useState();
+  const [kind, setKind] = useState('');
+  const [birthDate, setBirthDate] = useState('');
+  const [about, setAbout] = useState('');
+  const [phone, setPhone] = useState('');
+  const [location, setLocation] = useState('');
+  const [ownerName, setOwnerName] = useState('');
   const [image, setImage] = useState();
   const [imgPreview, setImgPreview] = useState();
 
   useEffect(() => {
-    fetch(`http://localhost:8080/posts/postbyid/${postId}`, {
+    const cookies = new Cookies();
+    fetcher(`${process.env.REACT_APP_SERVER_URL}:${process.env.REACT_APP_SERVER_PORT}/posts/postbyid/${postId}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -36,7 +39,7 @@ const EditPost = (props) => {
     }).then((res) => res.json())
       .then((data) => {
         const { ownerName, kind, birthDate, about, phone, location } = data.post;
-        const imageUrl= `${serverUrl}:${port}/images/${data.post.image}`;
+        const imageUrl = `${serverUrl}:${port}/images/${data.post.image}`;
         setKind(kind);
         setBirthDate(birthDate);
         setAbout(about);
@@ -44,16 +47,20 @@ const EditPost = (props) => {
         setLocation(location);
         setOwnerName(ownerName);
         setImage(imageUrl);
+        setImgPreview(imageUrl);
+      }).catch((err) =>{
+        toast("failed to retrieve post data")
       });
   }, []);
 
   const imgSelected = (event) => {
     setImgPreview(URL.createObjectURL(event.target.files[0]));
-    setImage(event.target.files[0]); 
+    setImage(event.target.files[0]);
   }
   const handleEditInfo = (event) => {
+    const cookies = new Cookies();
     event.preventDefault(); // Prevent default form submission
-    fetch(`http://localhost:8080/posts/${postId}`, {
+    fetcher(`${process.env.REACT_APP_SERVER_URL}:${process.env.REACT_APP_SERVER_PORT}/posts/${postId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -72,26 +79,27 @@ const EditPost = (props) => {
       .then(() => {
         navigate('/myposts')
       }).catch((err) => {
-
+        toast("failed to update post")
       });
-
   };
 
   const handelUploadPostImage = (event) => {
     event.preventDefault();
     const formData = new FormData();
     formData.append('image', image);
-    fetch('http://localhost:8080/files', {
+    fetch(`${process.env.REACT_APP_SERVER_URL}:${process.env.REACT_APP_SERVER_PORT}/files`, {
       method: 'POST',
       body: formData
     }).then((res) => res.json())
       .then((data) => {
         setImage(data.imageName);
+        const imageUrl = `${serverUrl}:${port}/images/${data.imageName}`;
+        setImgPreview(imageUrl);
       })
       .catch(err => {
         console.log(err)
       });
-   
+
   };
   const handleKindChange = (event) => {
     setKind(event.target.value);
@@ -111,13 +119,13 @@ const EditPost = (props) => {
   const handleOwnerNameChange = (event) => {
     setOwnerName(event.target.value);
   };
-  
+
   return (
     <div className="edit-page">
       <div className="glass-container-edit">
         <h2>Edit Your Post</h2>
         <form className="edit-form" onSubmit={handleEditInfo}>
-          <img src={image ? image : postImage} alt='' className='postImg' />
+          <img src={imgPreview} alt='' className='postImg' />
           <span>edit post image</span>
           <span>first select new image then click on the icon</span>
           <IconButton
@@ -135,7 +143,7 @@ const EditPost = (props) => {
           <input className='edit-input' type="tel" onChange={handlePhoneChange} value={phone} placeholder="phone" required />
           <input className='edit-input' type="text" onChange={handleLocationChange} value={location} placeholder="location" required />
           <input className='edit-input' type="text" onChange={handleOwnerNameChange} value={ownerName} placeholder="ownerName" required />
-          <button className='submit-btn' type="submit"></button>
+          <button className='submit-btn-edit-post' type="submit">submit changes</button>
         </form>
       </div>
     </div>

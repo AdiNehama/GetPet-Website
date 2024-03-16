@@ -5,10 +5,13 @@ import GoogleIcon from '@mui/icons-material/Google';
 import { IconButton } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
+import { toast } from 'react-toastify';
 import './SignInPage.css';
 
 const SignInPage = (props) => {
   const navigate = useNavigate();
+  const server_url = process.env.REACT_APP_SERVER_URL;
+  const server_port = process.env.REACT_APP_SERVER_PORT;
 
   const login = useGoogleLogin({
     onSuccess: () => { console.log('Success') }
@@ -28,6 +31,7 @@ const SignInPage = (props) => {
   const handleSignInWithEmail = async (event) => {
     event.preventDefault();
     if (!email || !password) {
+      toast("please enter your email and password")
       return;
     }
 
@@ -36,7 +40,7 @@ const SignInPage = (props) => {
         'email': email,
         'password': password
       }
-      const loginResponse = await fetch('http://localhost:8080/users/login', {
+      const loginResponse = await fetch(`${server_url}:${server_port}/users/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -55,6 +59,7 @@ const SignInPage = (props) => {
 
     } catch (error) {
       console.error('login error:', error);
+      toast("Failed to login, please try again later.")
     }
   };
 
@@ -69,8 +74,8 @@ const SignInPage = (props) => {
       <div className="glass-container-sign-in">
         <h2>Sign In</h2>
         <form className="sign-in-form" onSubmit={handleSignInWithEmail}>
-          <input className="email-input" onChange={handleChangeEmail} value={email} type="email" placeholder="Email" required />
-          <input className="password-input" onChange={handleChangePassword} value={password} type="password" placeholder="Password" required />
+          <input name="email" className="email-input" onChange={handleChangeEmail} value={email} type="email" placeholder="Email" required />
+          <input name="password" className="password-input" onChange={handleChangePassword} value={password} type="password" placeholder="Password" required />
           <button className="sign-in-btn" type="submit">Sign In</button>
         </form>
         <div className="or-text">
