@@ -1,7 +1,6 @@
 const UserSchema = require('../../models/UserSchema');
 const { validateUser } = require('../../validation/loginUtils');
 const jwt = require('jsonwebtoken');
-const passport = require('passport');
 
 
 exports.login = async (req, res) => {
