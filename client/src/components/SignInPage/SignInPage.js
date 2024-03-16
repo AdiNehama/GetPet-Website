@@ -15,30 +15,6 @@ const SignInPage = (props) => {
   const server_url = process.env.REACT_APP_SERVER_URL;
   const server_port = process.env.REACT_APP_SERVER_PORT;
 
-  // const handleSignInWithGoogle = async (credentialResponse) => {
-  //   try {
-  //     const decoded = jwtDecode(credentialResponse.credential);
-  //     const userId = decoded.sub;
-  //     const accessToken = credentialResponse.accessToken;
-  //     const refreshToken = credentialResponse.refreshToken;
-
-  //     // Save access token in cookies
-  //     const cookies = new Cookies();
-  //     cookies.set('access_token', accessToken);
-
-  //     // Save refresh token and user ID in local storage
-  //     localStorage.setItem('refresh_token', refreshToken);
-  //     localStorage.setItem('user_id', userId);
-
-  //     // Update state to indicate user is logged in
-  //     props.setIsUserLoggedIn(true);
-
-  //     // Navigate to home page
-  //     navigate('/home');
-  //   } catch (error) {
-  //     console.error('Google sign-in error:', error);
-  //   }
-  // }
 
   
   const [email, setEmail] = useState('');

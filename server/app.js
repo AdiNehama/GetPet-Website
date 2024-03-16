@@ -7,8 +7,6 @@ var logger = require("morgan");
 var bodyParser = require("body-parser");
 const cors = require("cors");
 var { expressjwt: jwt } = require("express-jwt");
-
-//port
 const port = 8080;
 
 var indexRouter = require("./routes/index");
@@ -61,6 +59,26 @@ app.use(function (err, req, res, next) {
 
 const server = app.listen(port, () => console.log(`Server running on port ${port}.`));
 
+
+
+// const isHttps = process.env.IS_HTTPS === "true";
+// const httpsPort = process.env.HTTPS_PORT;
+// const httpPort = process.env.HTTP_PORT;
+// const port = isHttps ? httpsPort : httpPort;
+// const isRailway = process.env.IS_RAILWAY === "true";
+
+// if (isRailway) {
+//   const railwayPort = process.env.PORT;
+
+//   app.listen(railwayPort, "0.0.0.0", function () {
+//     console.log('Server is running on port ' + port);
+//   });
+// } else {
+//   app.listen(port, function () {
+//     console.log('Server is running on port ' + port);
+//   });
+// }
+
 const io = require("socket.io")(server, {
   // Configure CORS for socket.io
   cors: {
@@ -70,8 +88,6 @@ const io = require("socket.io")(server, {
     credentials: true // Include cookies in CORS requests
   }
 });
-
-
 io.on("connection", async (socket) => {
   console.log(`User Connected: ${socket.id}`);
 
