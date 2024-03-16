@@ -1,4 +1,26 @@
-.post-card-container {
-    justify-content: center;
-    display: flex;
+.search-container {
+    position: relative;
+    height: 71%;
+    width: 25%;
+    margin: 10px auto 0;
+    border: 1.5px solid #75665d;
+    border-radius: 5px;
+  }
+  
+  .search-wrapper {
+    position: relative;
+  }
+  
+  .search-input {
+    margin: 0;
+    padding: 0;
+    text-indent: 20px;
 }
+  
+  .search-icon {
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #75665d
+  }
