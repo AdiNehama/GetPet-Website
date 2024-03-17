@@ -23,34 +23,38 @@ function Chat({ socket, username, room }) {
     }
   };
 
- 
+
   useEffect(() => {
     const handleMessage = (data) => {
       setMessageList((list) => [...list, data]);
     };
-  
+
     socket.on("receive_message", handleMessage);
-  
+
     return () => {
       socket.off("receive_message", handleMessage);
     };
   }, [socket]);
-  
+
+  const uniqueUsers = [...new Map(messageList.map(({ author }) => [author, author])).values()];
 
   return (
     <div className="chat-window">
       <div className="chat-header">
-      {messageList.map((messageContent) => {
-            return (
-              <p id="author">{messageContent.author}</p> 
-                );})}   </div>
+        {uniqueUsers.map((user) => {
+          return (
+            <p key={user}>{user}</p>
+          );
+        })}
+      </div>
       <div className="chat-body">
-      
+
         <ScrollToBottom className="message-container">
           {messageList.map((messageContent) => {
             return (
               <div
                 className="message"
+                key={JSON.stringify(messageContent)}
                 id={username === messageContent.author ? "you" : "other"}
               >
                 <div>
