@@ -7,7 +7,6 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import HomeIcon from '@mui/icons-material/Home';
 import ChatIcon from '@mui/icons-material/Chat';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
-import SearchIcon from '@mui/icons-material/Search';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -23,9 +22,9 @@ function NavigationBar() {
 
     const shouldShowAboutBtn = pathname === '/';
     const shouldShowSignInBtn = pathname === '/';
-    const shouldShowLogo = ['/home', '/editprofile', '/profile', '/myposts', '/chat', '/upload', '/signin', '/register'].includes(pathname) || ['/editpost'].includes(pathname.split('/').slice(0, -1).join('/'));
+    const shouldShowLogo = ['/home', '/editprofile', '/comments' ,'/profile', '/myposts', '/chat', '/upload', '/signin', '/register'].includes(pathname) || ['/editpost', '/comments'].includes(pathname.split('/').slice(0, -1).join('/'));
     const shouldShowBackBtn = ['/about', '/signin', '/register'].includes(pathname);
-    const shouldShowNavigationLinks = ['/home', '/editprofile', '/profile', '/myposts', '/chat', '/upload'].includes(pathname) || ['/editpost'].includes(pathname.split('/').slice(0, -1).join('/'));
+    const shouldShowNavigationLinks = ['/home', '/editprofile', '/profile', '/myposts', '/chat', '/upload'].includes(pathname) || ['/editpost', '/comments'].includes(pathname.split('/').slice(0, -1).join('/'));
     const shouldShowSystemButtons = shouldShowAboutBtn || shouldShowSignInBtn;
 
 
@@ -47,7 +46,6 @@ function NavigationBar() {
                 navigate('/');
             }}).catch((err) => {
                     console.log(err);
-
                 });
 
         } catch (error) {

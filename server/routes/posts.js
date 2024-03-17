@@ -1,11 +1,12 @@
-var express = require("express");
-const authenticate = require("../middelware/authMiddelware");
-const allPosts = require("../controllers/posts/getAllPostsController");
-const postByUid = require("../controllers/posts/postsByUidController");
-const newPost = require("../controllers/posts/uploadPostController");
-const updateMyPost = require("../controllers/posts/updateMyPostController");
-var deletePost = require("../controllers/posts/deletePostController");
-const postByPostId = require("../controllers/posts/getPostByPostIdController");
+var express = require('express');
+const authenticate = require('../middelware/authMiddelware');
+const allPosts = require('../controllers/posts/getAllPostsController');
+const postByUid = require('../controllers/posts/postsByUidController');
+const newPost = require('../controllers/posts/uploadPostController');
+const updateMyPost = require('../controllers/posts/updateMyPostController');
+var deletePost = require('../controllers/posts/deletePostController');
+const postByPostId = require('../controllers/posts/getPostByPostIdController');
+const addComment = require('../controllers/posts/postNewComment');
 
 var router = express.Router();
 

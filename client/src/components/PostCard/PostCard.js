@@ -3,6 +3,7 @@ import Card from 'react-bootstrap/Card';
 import ChatIcon from '@mui/icons-material/Chat';
 import IconButton from '@mui/material/IconButton';
 import { useNavigate } from 'react-router-dom';
+import AddCommentIcon from '@mui/icons-material/AddComment';
 import './PostCard.css';
 
 function PostCard(props) {
@@ -17,6 +18,9 @@ function PostCard(props) {
   const handleClick = () => {
     navigate('/chat');
   };
+  const handleClickComments = () => {
+    navigate('/comments/' + props.id);
+  }
 
   return (
     <Card className="post-Card" style={{ width: '18rem', marginTop: '20px' }}>
@@ -68,6 +72,7 @@ function PostCard(props) {
           </div>
         </Card.Text>
         <IconButton variant="primary" onClick={handleClick}><ChatIcon /></IconButton>
+        <IconButton variant="primary" onClick={handleClickComments}><AddCommentIcon /></IconButton>
       </Card.Body>
     </Card>
   );

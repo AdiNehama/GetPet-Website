@@ -5,7 +5,6 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { fetcher } from '../../services/fetcher';
 import { toast } from 'react-toastify';
 import './HomePage.css';
-import { Icon } from '@mui/material';
 import { Search as SearchIcon } from '@mui/icons-material';
 
 const HomePage = () => {
@@ -77,6 +76,7 @@ const HomePage = () => {
                 {filteredPosts.map((post) => (
                     <Col key={'post' + post._id} className='post-card-container'>
                         <PostCard className='post-card'
+                            id={post._id}
                             image={post.image}
                             kind={post.kind}
                             birthDate={post.birthDate}
