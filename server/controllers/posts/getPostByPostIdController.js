@@ -5,7 +5,16 @@ exports.getPostByPostId = async (req, res) => {
     
     if(_id){
         try {
-            const post = await PostSchema.findOne({ _id });
+            const post = await PostSchema.findOne({ _id })
+            .select('-comments.userId.tokens -comments.userId.password -comments.userId.phone -comments.userId.email')
+            .populate({ 
+                path: 'comments',
+                populate: {
+                  path: 'userId',
+                  model: 'User',
+                  select: '-password -tokens -phone -email'
+                } 
+             });
 
             res.status(200).json({ message: 'Success', post })
         } catch (error) {

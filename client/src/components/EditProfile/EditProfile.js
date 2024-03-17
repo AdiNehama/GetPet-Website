@@ -7,7 +7,7 @@ import { fetcher } from '../../services/fetcher';
 import { toast } from 'react-toastify';
 import './EditProfile.css'
 
-const Profile = () => {
+const EditProfile = () => {
   const navigate = useNavigate();
   const serverUrl = process.env.REACT_APP_SERVER_URL;
   const port = process.env.REACT_APP_SERVER_PORT;
@@ -138,4 +138,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default EditProfile;

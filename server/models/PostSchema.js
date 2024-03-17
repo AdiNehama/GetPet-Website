@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+const PostCommentSchema = require('./PostComment');
 
 const { Schema } = mongoose;
 
@@ -33,6 +34,9 @@ const PostSchema = new Schema({
     location:{
         type: String,
         required: true
+    },
+    comments:{
+        type: [PostCommentSchema]
     }
 });
 

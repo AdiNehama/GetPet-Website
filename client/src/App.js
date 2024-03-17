@@ -13,6 +13,7 @@ import EditPost from './components/EditPost/EditPost';
 import ChatPage from './components/ChatPage/ChatPage';
 import ProfilePage from './components/ProfilePage/ProfilePage'
 import EditProfile from './components/EditProfile/EditProfile';
+import Comments from './components/Comments/Comments';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { ToastContainer, toast } from 'react-toastify';
@@ -34,6 +35,7 @@ function App() {
             </Fragment>}
             {isUserLoggedIn && <Fragment>
               <Route path="/home" element={<HomePage />} />
+              <Route path="/comments/:postId" element={<Comments />} />
               <Route path="/myposts" element={<MyPosts />} />
               <Route path="/upload" element={<UploadPost />} />
               <Route path="/chat" element={<ChatPage />} />

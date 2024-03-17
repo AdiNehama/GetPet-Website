@@ -6,6 +6,7 @@ const newPost = require('../controllers/posts/uploadPostController');
 const updateMyPost = require('../controllers/posts/updateMyPostController');
 var deletePost = require('../controllers/posts/deletePostController');
 const postByPostId = require('../controllers/posts/getPostByPostIdController');
+const addComment = require('../controllers/posts/postNewComment');
 
 var router = express.Router();
 
@@ -27,7 +28,8 @@ router.delete('/:postId', authenticate, deletePost.DeletePost);
 //get post by post id
 router.get('/postbyid/:postId', authenticate, postByPostId.getPostByPostId);
 
-
+// add comment to post
+router.post('/addcomment', authenticate, addComment.PostNewComment);
 
 
 module.exports = router;

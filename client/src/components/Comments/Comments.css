@@ -1,0 +1,73 @@
+.comment-box {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: white;
+    margin: 1rem;
+  }
+
+  .comment-page{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1rem;
+    position: relative;
+    height: 100vh;
+    background: linear-gradient(rgba(195, 184, 177, 0.6), rgba(195, 184, 177, 0.6)), url('../../assets/images/backroundImg.jpeg');
+    background-size: contain;
+    background-position: right top;
+    z-index: 0;
+    background-repeat: no-repeat;
+    height: 100vh; /* Set height to 100vh */
+    overflow-y: auto; /* Allow vertical scrolling */
+  }
+  
+  .comment-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+  }
+  
+  .author {
+    font-weight: bold;
+    margin-right: 1rem;
+  }
+  
+  .date {
+    color: #777;
+  }
+  
+  .comment-text {
+    white-space: pre-wrap; 
+  }
+  
+  .add-comment-section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .post-comment-btn{
+    color: white;
+    border: 1px solid white;
+    background-color: #C3B8B1;
+    margin-right: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+
+  .post-comment-btn:hover{
+    background-color: #ece2dd;
+  }
+
+  .profile-picture{
+    display: flex;
+    flex-direction: column;
+    height: 40px;
+    width: 40px;
+    margin-right: 1rem;
+  }

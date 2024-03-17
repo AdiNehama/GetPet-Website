@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useGoogleOAuth } from '@react-oauth/google';
 import GoogleIcon from '@mui/icons-material/Google';
 import { IconButton } from '@mui/material';
 import profile from '../../assets/images/user-default-96.png';
@@ -14,7 +13,6 @@ const RegisterPage = () => {
 
   const navigate = useNavigate();
   const [imgPreview, setImgPreview] = useState('');
-  const { signup } = useGoogleOAuth();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

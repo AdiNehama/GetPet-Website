@@ -11,6 +11,8 @@ import './SignInPage.css';
 const clientId = "422894887443-746rnu7vd6ldo6kkpjmorm0tebh1rt23.apps.googleusercontent.com";
 
 const SignInPage = (props) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const server_url = process.env.REACT_APP_SERVER_URL;
   const server_port = process.env.REACT_APP_SERVER_PORT;
@@ -45,9 +47,6 @@ const SignInPage = (props) => {
     console.error('Google Sign-In Error:', error);
     toast("Failed to sign in with Google, please try again later.");
   };
-
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
 
 
   const handleChangeEmail = (event) => {
