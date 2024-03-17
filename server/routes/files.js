@@ -14,6 +14,91 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage })
 
+/**
+ * @swagger
+ * tags:
+ *   name: Files
+ *   description: The Files API
+ */
+
+/**
+ * @swagger
+ * components:
+ *   securitySchemes:
+ *     bearerAuth:
+ *       type: http
+ *       scheme: bearer
+ *       bearerFormat: JWT
+ */
+
+
+//schemas :
+
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     File:
+ *       type: object
+ *       required:
+ *         - file
+ *       properties:
+ *         file:
+ *           type: string
+ *           description: The file
+ *       example:
+ *         file: 'string'
+ */
+
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Tokens:
+ *       type: object
+ *       required:
+ *         - accessToken
+ *         - refreshToken
+ *       properties:
+ *         accessToken:
+ *           type: string
+ *           description: The JWT access token
+ *         refreshToken:
+ *           type: string
+ *           description: The JWT refresh token
+ *       example:
+ *         accessToken: '123cd123x1xx1'
+ *         refreshToken: '134r2134cr1x3c'
+ */
+
+
+
+
+
+
+/**
+ * @swagger
+ * /files:
+ *   post:
+ *     summary: file
+ *     tags: [Files]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/File'
+ *     responses:
+ *       200:
+ *         description:  files in the web
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Tokens'
+ */
+
 router.post('/', upload.single("image"), async (req, res) => {
     console.log(req.body);
     const imageName = req.file?.filename;

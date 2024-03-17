@@ -14,7 +14,7 @@ const RegisterPage = () => {
 
   const navigate = useNavigate();
   const [imgPreview, setImgPreview] = useState('');
-  const { signup } = useGoogleOAuth();
+  // const { signup } = useGoogleOAuth();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -142,10 +142,10 @@ const RegisterPage = () => {
         <div className="or-text-register">
           <span>or</span>
         </div>
-        <div className="google-sign-up">
+        {/* <div className="google-sign-up">
           <span>Sign up with Google</span>
           <IconButton sx={{ width: 'fit-content' }}><GoogleIcon /></IconButton>
-        </div>
+        </div> */}
       </div>
     </div>
   );

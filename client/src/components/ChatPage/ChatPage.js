@@ -4,19 +4,16 @@ import io from "socket.io-client";
 import "./ChatC";
 import Chat from "./ChatC";
 
+const socket = io.connect("https://localhost:443");
+
 const ChatPage = () => {
+
+
   const [username, setUsername] = useState("");
   const [room, setRoom] = useState("");
   const [showChat, setShowChat] = useState(false);
 
-  // useEffect(() =>{
-  //   const socket = io.connect("http://localhost:8080");
-  //   return () => {
-  //     socket.disconnect();
-  //   };
-  // }, []);
-
-  const socket = io.connect("http://localhost:8080");
+ 
 
   const joinRoom = () => {
     if (username !== "" && room !== "") {
