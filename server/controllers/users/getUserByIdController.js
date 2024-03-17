@@ -4,7 +4,7 @@ exports.getOneUserById = async function (req, res) {
     var userId = req.params.userId?.toString();
     if (userId) {
         try {
-            const user = await UserSchema.findOne({ _id: userId }); // Assuming userId is the _id field in your UserSchema
+            const user = await UserSchema.findOne({ _id: userId }); 
             if (user) {
                 res.status(200).json(user);
             } else {

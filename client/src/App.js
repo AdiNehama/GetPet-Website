@@ -15,8 +15,9 @@ import ProfilePage from './components/ProfilePage/ProfilePage'
 import EditProfile from './components/EditProfile/EditProfile';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
 function App() {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(!!(new Cookies().get('access_token')));
 

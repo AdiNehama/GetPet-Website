@@ -4,10 +4,11 @@ import io from "socket.io-client";
 import "./ChatC";
 import Chat from "./ChatC";
 
-
-const socket = io.connect("https://localhost");
+const socket = io.connect("https://localhost:443");
 
 const ChatPage = () => {
+
+
   const [username, setUsername] = useState("");
   const [room, setRoom] = useState("");
   const [showChat, setShowChat] = useState(false);

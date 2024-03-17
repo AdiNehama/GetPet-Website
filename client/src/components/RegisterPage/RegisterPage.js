@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// import { useGoogleOAuth } from '@react-oauth/google';
+import { useGoogleOAuth } from '@react-oauth/google';
 import GoogleIcon from '@mui/icons-material/Google';
 import { IconButton } from '@mui/material';
 import profile from '../../assets/images/user-default-96.png';
@@ -87,10 +87,10 @@ const RegisterPage = () => {
   };
 
 
-  // const handleRegisterWithGoogle = () => {
-  //   // Implement Google registration logic here
-  //   console.log("Registering with Google...");
-  // };
+  const handleRegisterWithGoogle = () => {
+    // Implement Google registration logic here
+    console.log("Registering with Google...");
+  };
 
   const handelUploadProfileImage = (event) => {
     event.preventDefault();
@@ -142,10 +142,10 @@ const RegisterPage = () => {
         <div className="or-text-register">
           <span>or</span>
         </div>
-        <div className="google-sign-up">
+        {/* <div className="google-sign-up">
           <span>Sign up with Google</span>
           <IconButton sx={{ width: 'fit-content' }}><GoogleIcon /></IconButton>
-        </div>
+        </div> */}
       </div>
     </div>
   );
