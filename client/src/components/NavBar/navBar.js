@@ -16,8 +16,8 @@ import { fetcher } from '../../services/fetcher';
 import './navBar.css';
 
 function NavigationBar() {
-    const { pathname } = useLocation(); // Get the current location
-    const navigate = useNavigate(); // Get the navigate function from the useNavigate hook
+    const { pathname } = useLocation(); //Get the current location
+    const navigate = useNavigate(); //Get the navigate function from the useNavigate hook
     const server_url = process.env.REACT_APP_SERVER_URL;
     const server_port = process.env.REACT_APP_SERVER_PORT;
 

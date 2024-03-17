@@ -6,15 +6,22 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var bodyParser = require("body-parser");
 const cors = require("cors");
-var { expressjwt: jwt } = require("express-jwt");
-const port = 8080;
+// const port = 8080;
+const https = require("https");
+const fs = require("fs");
+var connectDB = require("./db");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var postsRouter = require("./routes/posts");
 var filesRouter = require("./routes/files");
 
-var connectDB = require("./db");
+const options = {
+  key:fs.readFileSync(path.join(__dirname,'./cert/privatekey.pem')),
+  cert:fs.readFileSync(path.join(__dirname,'./cert/certificate.pem'))
+};
+
+const httpsApp = https.createServer(options, app);
 
 connectDB();
 
@@ -30,7 +37,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 // Enable CORS for all routes
 app.use(cors({
-  origin: 'http://localhost:3001', // Allow requests from the client's origin
+  origin: 'http://localhost:3000', // Allow requests from the client's origin
   optionsSuccessStatus: 200, // Some legacy browsers choke on 204
   credentials: true // Include cookies in CORS requests
 }));
@@ -55,46 +62,36 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render("error");
 });
-//port 8080
-
-const server = app.listen(port, () => console.log(`Server running on port ${port}.`));
 
 
 
-// const isHttps = process.env.IS_HTTPS === "true";
-// const httpsPort = process.env.HTTPS_PORT;
-// const httpPort = process.env.HTTP_PORT;
-// const port = isHttps ? httpsPort : httpPort;
-// const isRailway = process.env.IS_RAILWAY === "true";
+const isHttps = process.env.IS_HTTPS === "true";
+const httpsPort = process.env.HTTPS_PORT;
+const httpPort = process.env.HTTP_PORT;
+const port = isHttps ? httpsPort : httpPort;
 
-// if (isRailway) {
-//   const railwayPort = process.env.PORT;
 
-//   app.listen(railwayPort, "0.0.0.0", function () {
-//     console.log('Server is running on port ' + port);
-//   });
-// } else {
-//   app.listen(port, function () {
-//     console.log('Server is running on port ' + port);
-//   });
-// }
+const server= httpsApp.listen(port, function () {
+  console.log('Server is running on port ' + port);
+});
 
 const io = require("socket.io")(server, {
   // Configure CORS for socket.io
   cors: {
-    origin: "http://localhost:3001", // Allow requests from the client's origin
+    origin: "http://localhost:3000", // Allow requests from the client's origin
     methods: ["GET", "POST"], // Allow specified methods
     allowedHeaders: ["my-custom-header"], // Allow specified headers
     credentials: true // Include cookies in CORS requests
   }
 });
+
+
 io.on("connection", async (socket) => {
   console.log(`User Connected: ${socket.id}`);
 
   socket.on("join_room", (data) => {
     socket.join(data);
     console.log(`User with ID: ${socket.id} joined room: ${data}`);
-  });
 
   socket.on("send_message", (data) => {
     socket.to(data.room).emit("receive_message", data);
@@ -104,6 +101,6 @@ io.on("connection", async (socket) => {
     console.log("User Disconnected", socket.id);
   });
 });
-
+});
 
 module.exports = app;

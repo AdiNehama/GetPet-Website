@@ -5,10 +5,13 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { fetcher } from '../../services/fetcher';
 import { toast } from 'react-toastify';
 import './HomePage.css';
+import { Icon } from '@mui/material';
+import { Search as SearchIcon } from '@mui/icons-material';
 
 const HomePage = () => {
     const [posts, setPosts] = useState([]);
-
+    const [filteredPosts, setFilteredPosts] = useState([]); //State to hold filtered posts
+    const [searchTerm, setSearchTerm] = useState(''); //State for the search term
 
     useEffect(() => {
         const cookies = new Cookies();
@@ -40,12 +43,40 @@ const HomePage = () => {
             });
     }, []);
 
+    useEffect(() => {
+        //Filter posts based on searchTerm
+        const filtered = posts.filter(post => post.kind.toLowerCase().includes(searchTerm.toLowerCase()));
+        setFilteredPosts(filtered);
+    }, [searchTerm, posts]);
+
+    //Function to handle search term change
+    const handleSearchChange = (event) => {
+        setSearchTerm(event.target.value);
+    };
+
     return (
-        <Container >
+        <Container>
             <Row>
-                {posts.map((post) => (
-                    <Col className='post-card-container' key={'post' + post._id}>
-                        <PostCard  className='post-card'
+                <Col>
+                    <form className="search-container">
+                        <div className=" search-wrapper">
+                            <input
+                                className="search-input"
+                                type="text"
+                                value={searchTerm}
+                                onChange={handleSearchChange}
+                                placeholder="Search pet by kind"
+                            />
+                            <SearchIcon className="search-icon" />
+                        </div>
+                    </form>
+                </Col>
+            </Row>
+
+            <Row>
+                {filteredPosts.map((post) => (
+                    <Col key={'post' + post._id} className='post-card-container'>
+                        <PostCard className='post-card'
                             image={post.image}
                             kind={post.kind}
                             birthDate={post.birthDate}

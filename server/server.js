@@ -3,7 +3,7 @@ import swaggerJsDoc from "swagger-jsdoc"
 var app = require('../app');
 
 
-const port = 8080; 
+const port = 443; 
 
     if (process.env.NODE_ENV == "development"){
     const options = {
@@ -14,7 +14,7 @@ const port = 8080;
           version: "1.0.1",
           description: "REST server including authentication using JWT and refresh token",
         },
-        servers: [{ url: "http://localhost:8080", },],//TODO: replace it with current server url
+        servers: [{ url: "http://localhost:443", },],//TODO: replace it with current server url
       },
       apis: ["./src/routes/*.ts"],
     };
