@@ -10,101 +10,101 @@ const addComment = require('../controllers/posts/postNewComment');
 
 var router = express.Router();
 
-/**
- * @swagger
- * tags:
- *   name: Posts
- *   description: The posts API
- */
+// /**
+//  * @swagger
+//  * tags:
+//  *   name: Posts
+//  *   description: The posts API
+//  */
 
-/**
- * @swagger
- * components:
- *   securitySchemes:
- *     bearerAuth:
- *       type: http
- *       scheme: bearer
- *       bearerFormat: JWT
- */
+// /**
+//  * @swagger
+//  * components:
+//  *   securitySchemes:
+//  *     bearerAuth:
+//  *       type: http
+//  *       scheme: bearer
+//  *       bearerFormat: JWT
+//  */
 
-//schema
-
-
+// //schema
 
 
 
-/**
- * @swagger
- * components:
- *   schemas:
- *     Comment:
- *       type: object
- *       required:
- *         - date
- *         - content
- *       properties:
- *         date:
- *           type: string
- *           description: The date of comment
- *         content:
- *           type: string
- *           description: The text comment
- *       example:
- *           date: '18-3-2024'
-*             content: 'really cute'
- */
 
 
-/**
- * @swagger
- * components:
- *   schemas:
- *     Post:
- *       type: object
- *       required:
- *         - userId
- *         - ownerName
- *         - image
- *         - kind
- *         - birthDate
- *         - about
- *         - phone
- *         - location
- *       properties:
- *         userId:
- *           type: string
- *           description: The user id
- *         ownerName:
- *           type: string
- *           description: The owner name
- *         image:
- *           type: string
- *           description: The dog picture
- *         kind:
- *           type: string
- *           description: The dog kind
- *         birthDate:
- *           type: string
- *           description: The dog birthdate
- *         about:
- *           type: string
- *           description: The dog discription
- *         phone:
- *           type: string
- *           description: The owners phone
- *         location:
- *           type: string
- *           description: The dogs location
- *       example:
- *           userId: '65ea29fc58870fbcf56abfaf'
- *           ownerName: 'maya'
- *           image: '1710243749001aboutImg.jpeg'
- *           kind: 'poodel'
- *           birthDate: '2/2/2021'
- *           about: 'cute and loud12'
- *           phone: '0544460415'
- *           location: 'tel aviv'
- */
+// /**
+//  * @swagger
+//  * components:
+//  *   schemas:
+//  *     Comment:
+//  *       type: object
+//  *       required:
+//  *         - date
+//  *         - content
+//  *       properties:
+//  *         date:
+//  *           type: string
+//  *           description: The date of comment
+//  *         content:
+//  *           type: string
+//  *           description: The text comment
+//  *       example:
+//  *           date: '18-3-2024'
+// *             content: 'really cute'
+//  */
+
+
+// /**
+//  * @swagger
+//  * components:
+//  *   schemas:
+//  *     Post:
+//  *       type: object
+//  *       required:
+//  *         - userId
+//  *         - ownerName
+//  *         - image
+//  *         - kind
+//  *         - birthDate
+//  *         - about
+//  *         - phone
+//  *         - location
+//  *       properties:
+//  *         userId:
+//  *           type: string
+//  *           description: The user id
+//  *         ownerName:
+//  *           type: string
+//  *           description: The owner name
+//  *         image:
+//  *           type: string
+//  *           description: The dog picture
+//  *         kind:
+//  *           type: string
+//  *           description: The dog kind
+//  *         birthDate:
+//  *           type: string
+//  *           description: The dog birthdate
+//  *         about:
+//  *           type: string
+//  *           description: The dog discription
+//  *         phone:
+//  *           type: string
+//  *           description: The owners phone
+//  *         location:
+//  *           type: string
+//  *           description: The dogs location
+//  *       example:
+//  *           userId: '65ea29fc58870fbcf56abfaf'
+//  *           ownerName: 'maya'
+//  *           image: '1710243749001aboutImg.jpeg'
+//  *           kind: 'poodel'
+//  *           birthDate: '2/2/2021'
+//  *           about: 'cute and loud12'
+//  *           phone: '0544460415'
+//  *           location: 'tel aviv'
+//  */
 
 /**
  * @swagger
