@@ -7,7 +7,7 @@ exports.PostNewComment = async (req, res) => {
     if (userId) {
         try {
             const post = await PostSchema.findById(postId);
-            post.comments.push({ userId, date, content });
+            post.comments.push({ userId,  content , date: currentDate });
             await post.save();
             res.status(201).json(post);
         } catch (error) {

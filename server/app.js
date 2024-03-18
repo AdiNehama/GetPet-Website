@@ -6,34 +6,37 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var bodyParser = require("body-parser");
 const cors = require("cors");
-// const port = 8080;
 const https = require("https");
+const http = require("http");
 const fs = require("fs");
 var connectDB = require("./db");
 var swaggerUI = require("swagger-ui-express");
+require('dotenv').config();
 var swaggerJsDoc = require("swagger-jsdoc");
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var postsRouter = require("./routes/posts");
 var filesRouter = require("./routes/files");
-// if (process.env.NODE_ENV == "development"){
-const option = {
-  definition: {
-    openapi: "3.0.0",
-    info: {
-      title: "Web Advanced Application development 2024 REST API",
-      version: "1.0.1",
-      description:
-        "REST server including authentication using JWT and refresh token",
-    },
-    servers: [{ url: "https://localhost:443" }], //TODO: replace it with current server url
-  },
-  apis: ["./routes/*.js"],
-};
-const specs = swaggerJsDoc(option);
-app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
 
-// }
+
+if (process.env.NODE_ENV == "development") {
+  const option = {
+    definition: {
+      openapi: "3.0.0",
+      info: {
+        title: "Web Advanced Application development 2024 REST API",
+        version: "1.0.1",
+        description:
+          "REST server including authentication using JWT and refresh token",
+      },
+      servers: [{ url: "https://localhost:443" }], //TODO: replace it with current server url
+    },
+    apis: ["./routes/*.js"],
+  };
+  const specs = swaggerJsDoc(option);
+  app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
+  http.createServer(app).listen(80);
+}
 
 const options = {
   key: fs.readFileSync(path.join(__dirname, "./cert/privatekey.pem")),
@@ -48,7 +51,8 @@ connectDB();
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
 
-app.use(logger("dev"));
+// Use logger based on environment
+app.use(process.env.NODE_ENV === 'production' ? logger('common') : logger('dev'));
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.urlencoded({ extended: false }));

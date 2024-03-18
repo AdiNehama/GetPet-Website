@@ -7,7 +7,7 @@ const UserSchema = require('../models/UserSchema');
 
 //validation function
 const validateUser = (user, res) => {
-    const { name, email, password, confirmPassword, phone, image } = user;
+    const { name, email, password, confirmedPassword, phone, image } = user;
     // Validate user object
     if (phone) {
         if (phone.length !== 10) {
@@ -31,7 +31,7 @@ const validateUser = (user, res) => {
 
     if (password) {
         //if the password and confirmation password are not the same return false
-        if (password !== confirmPassword) {
+        if (password !== confirmedPassword) {
             res.status(400).json({ message: 'Passwords do not match' });
 
             return false;
