@@ -32,7 +32,12 @@ const Profile = () => {
         setEmail(email);
         setPhone(phone);
         const imageUrl = `${serverUrl}:${port}/images/${data.image}`;
-        setImage(imageUrl);
+        if(imageUrl!== image){
+          setImage(imageUrl);
+        }
+        else{
+          setImage(data.image);
+        }
       }).catch((err) => {
         toast("failed to retrieve user data")
       });

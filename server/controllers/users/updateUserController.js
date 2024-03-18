@@ -5,15 +5,22 @@ const validateUser = require('../../validation/updateValidation');
 
 exports.UpdateUser = async (req, res) => {
     var userId = req.params.userId?.toString();
-    const { name, email, password, confirmPassword, phone, image } = req.body;
+    const { name, email, password, confirmedPassword, phone, image } = req.body;
     // Check that the data is valid
     const user = {
         name,
         email,
         password,
-        confirmPassword,
+        confirmedPassword,
         phone,
         image
+    }
+    if(password==''){
+        //get userfron db
+        const User = await UserSchema.findById(userId);
+        req.body.password = User.password;
+        user.password = User.password;
+        user.confirmedPassword = User.password;
     }
     const validationResult =  validateUser(user, res);
     if (!validationResult) {

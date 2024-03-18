@@ -36,8 +36,14 @@ const EditProfile = () => {
         setEmail(email);
         setPhone(phone);
         const imageUrl = `${serverUrl}:${port}/images/${data.image}`;
-        setImage(imageUrl);
-        setPreviewImg(imageUrl);
+        if(imageUrl === previewImg){
+          setImage(imageUrl);
+          setPreviewImg(imageUrl);
+        }
+        else{
+          setImage(data.image);
+          setPreviewImg(data.image);
+        }
       }).catch((err) => {
         toast("failed to retrieve user data")
       });
