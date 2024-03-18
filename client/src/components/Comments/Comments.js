@@ -77,10 +77,12 @@ const Comments = () => {
             <div className="comment-container">
                 {comments.map((comment) => (
                     <div className="comment-box">
-                        <div className="comment-header">
+                        <div className="comment-header"
+                        key={comment._id}
+                        >
                             <img src={`${serverUrl}:${serverPort}/images/${comment.userId.image}`} alt="" className="profile-picture" />
                             <span className="author">{comment.userId.name}</span>
-                            <span className="date">{currentDate}</span>
+                            <span className="date">{comment.date}</span>
                         </div>
                         <div className="comment-text">{comment.content}</div>
                     </div>

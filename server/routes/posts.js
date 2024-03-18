@@ -241,4 +241,7 @@ router.delete("/:postId", authenticate, deletePost.DeletePost);
 //get post by post id
 router.get("/postbyid/:postId", authenticate, postByPostId.getPostByPostId);
 
+//add comment
+router.post("/addcomment", authenticate, addComment.PostNewComment);
+
 module.exports = router;
