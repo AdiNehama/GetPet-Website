@@ -269,6 +269,7 @@ router.get("/postbyid/:postId", authenticate, postByPostId.getPostByPostId);
 
 
 
+
 /**
  * @swagger
  * /posts:
