@@ -15,6 +15,13 @@ exports.UpdateUser = async (req, res) => {
         phone,
         image
     }
+    if(password==''){
+        //get userfron db
+        const User = await UserSchema.findById(userId);
+        req.body.password = User.password;
+        user.password = User.password;
+        user.confirmedPassword = User.password;
+    }
     const validationResult =  validateUser(user, res);
     if (!validationResult) {
         // handle validation error
