@@ -29,6 +29,32 @@ var router = express.Router();
 
 //schema
 
+
+
+
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Comment:
+ *       type: object
+ *       required:
+ *         - date
+ *         - content
+ *       properties:
+ *         date:
+ *           type: string
+ *           description: The date of comment
+ *         content:
+ *           type: string
+ *           description: The text comment
+ *       example:
+ *           date: '18-3-2024'
+*             content: 'really cute'
+ */
+
+
 /**
  * @swagger
  * components:
@@ -240,5 +266,30 @@ router.delete("/:postId", authenticate, deletePost.DeletePost);
 
 //get post by post id
 router.get("/postbyid/:postId", authenticate, postByPostId.getPostByPostId);
+
+
+
+/**
+ * @swagger
+ * /posts:
+ *   post:
+ *     summary: upload a new post
+ *     tags: [Posts]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Comment'
+ *     responses:
+ *       200:
+ *         description: new comment
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Tokens'
+ */
+//add comment
+router.post("/addcomment", authenticate, addComment.PostNewComment);
 
 module.exports = router;

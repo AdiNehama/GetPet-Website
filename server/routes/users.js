@@ -48,7 +48,7 @@ var router = express.Router();
  *           type: string
  *           description: The user password
  *       example:
- *         email: 'meshi1@gmail.com'
+ *         email: 'mayageva11@gmail.com'
  *         password: '123456'
  */
 
