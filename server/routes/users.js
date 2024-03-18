@@ -71,6 +71,7 @@ var router = express.Router();
 //  *          "refreshToken": "134r2134cr1x3c"
 //  */
 
+
 // /**
 //  * @swagger
 //  * /users:
@@ -90,6 +91,28 @@ var router = express.Router();
 //  *               items:
 //  *               $ref: '#/components/schemas/User'
 //  */
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     User:
+ *       type: object
+ *       required:
+ *         - email
+ *         - password
+ *       properties:
+ *         email:
+ *           type: string
+ *           description: The user email
+ *         password:
+ *           type: string
+ *           description: The user password
+ *       example:
+ *         email: 'mayageva11@gmail.com'
+ *         password: '123456'
+ */
+
 
 // //
 router.get("/", authenticate, allUsers.FetchAllUsers);
