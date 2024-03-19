@@ -21,7 +21,7 @@ const credentials = { key: options.key, cert: options.cert };
 
 const httpsServer = https.createServer(credentials, app);
 
-const port = 443;
+const port = process.env.SERVER_PORT || 443;
 
 httpsServer.listen(port, () => {
   console.log(`Server is running on https://localhost:${port}`);
