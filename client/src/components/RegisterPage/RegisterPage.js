@@ -98,7 +98,7 @@ const RegisterPage = () => {
       method: 'POST',
       body: formData
     }).then((res) => {
-      return res.text();
+      return res.json();
     })
       .then((data) => {
         setImage(data.imageName);
