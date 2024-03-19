@@ -29,13 +29,13 @@ if (process.env.NODE_ENV == "development") {
         description:
           "REST server including authentication using JWT and refresh token",
       },
-      servers: [{ url: "https://localhost:443" }], //TODO: replace it with current server url
+      servers: [{ url: "https://localhost:4001" }], //TODO: replace it with current server url
     },
     apis: ["./routes/*.js"],
   };
   const specs = swaggerJsDoc(option);
   app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
-  http.createServer(app).listen(80);
+  http.createServer(app).listen(4001);
 }
 
 const options = {
@@ -61,7 +61,6 @@ app.use(express.static(path.join(__dirname, "public")));
 // Enable CORS for all routes
 app.use(
   cors({
-    origin: "http://localhost:3000", // Allow requests from the client's origin
     optionsSuccessStatus: 200, // Some legacy browsers choke on 204
     credentials: true, // Include cookies in CORS requests
   })
@@ -100,7 +99,6 @@ const server = httpsApp.listen(port, function () {
 const io = require("socket.io")(server, {
   // Configure CORS for socket.io
   cors: {
-    origin: "http://localhost:3000", // Allow requests from the client's origin
     methods: ["GET", "POST"], // Allow specified methods
     allowedHeaders: ["my-custom-header"], // Allow specified headers
     credentials: true, // Include cookies in CORS requests

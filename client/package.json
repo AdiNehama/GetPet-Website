@@ -12,6 +12,7 @@
     "axios": "^1.6.7",
     "bootstrap": "^5.3.3",
     "dotenv": "^16.4.5",
+    "express": "^4.18.3",
     "express-jwt": "^8.4.1",
     "formik": "^2.4.5",
     "jquery": "^3.7.1",
@@ -29,7 +30,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts start --port 443 --host 0.0.0.0",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
