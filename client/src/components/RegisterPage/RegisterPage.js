@@ -97,7 +97,9 @@ const RegisterPage = () => {
     fetch(`${serverUrl}:${port}/files`, {
       method: 'POST',
       body: formData
-    }).then((res) => res.json())
+    }).then((res) => {
+      return res.text();
+    })
       .then((data) => {
         setImage(data.imageName);
         toast("image uploaded successfully")

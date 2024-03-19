@@ -29,7 +29,7 @@ if (process.env.NODE_ENV == "development") {
         description:
           "REST server including authentication using JWT and refresh token",
       },
-      servers: [{ url: "https://localhost:4001" }], //TODO: replace it with current server url
+      servers: [{ url: "https://node09.cs.colman.ac.il:4001" }], //TODO: replace it with current server url
     },
     apis: ["./routes/*.js"],
   };
@@ -70,7 +70,7 @@ app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/posts", postsRouter);
 app.use("/files", filesRouter);
-app.use("/images", express.static("uploads"));
+app.use("/images", express.static("public/images"));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
